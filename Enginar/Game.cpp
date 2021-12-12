@@ -12,6 +12,7 @@ SDL_Texture* player = nullptr;
 
 void Game::initializeGame(Window* _window)
 {
+	//Window'u eþitle
 	window = _window;
 
 #pragma region Test Texture Rendering
@@ -24,6 +25,7 @@ void Game::initializeGame(Window* _window)
 	loop();
 }
 
+//Gameloop
 void Game::loop()
 {
 	int x = 0;

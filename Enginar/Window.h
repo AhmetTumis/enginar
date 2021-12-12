@@ -11,7 +11,7 @@ public:
 	Window();
 	~Window();
 
-	void initializeWindow(const char* title, int x, int y, int width, int height, bool isFullscreen = false);
+	void initializeWindow(const char* title, int x, int y, bool isFullscreen = false);
 
 	void addTexture(SDL_Texture* texture);
 	void render();
