@@ -49,6 +49,19 @@ inline float nextP2(float x)
 	return (float) nextP2((int) x);
 }
 
+inline float fastInverseSqrt(float x) 
+{
+	float x2 = x * 0.5F;
+	float y = x;
+	long i = *(long *) &y;
+	i = 0x5f3759df - ( i >> 1 );
+	y = *(float *) &i;
+
+	y *= 1.5F - x2*y*y; 	// first iter
+	// y *= 1.5F - x2*y*y; 	// second iter...
+	return y;
+}
+
 }
 
 #endif // MATHATH_H
