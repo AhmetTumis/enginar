@@ -2,6 +2,7 @@
 
 #include "SDL.h"
 #include <vector>
+#include "Texture.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ public:
 
 	void initializeWindow(const char* title, int x, int y, bool isFullscreen = false);
 
-	void addTexture(SDL_Texture* texture);
+	void addTexture(Texture* texture);
 	void render();
 
 	SDL_Window* getWindow() { return window; }
@@ -23,6 +24,6 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	vector<SDL_Texture*> textures;
+	vector<Texture*> textures;
 };
 
