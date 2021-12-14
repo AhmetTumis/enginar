@@ -30,17 +30,30 @@ void Window::addTexture(Texture* texture)
 {
 	textures.push_back(texture);
 }
+int k = 0, t = 0;
 
 void Window::render()
 {
+	t++;
 	//Önceki frame'i temizle
 	SDL_RenderClear(renderer);
-
 	//Yeni frame'de texture'larý render'la
 	for (int i = 0; i < textures.size(); i++)
 	{
 		auto tex = textures[i];
-		SDL_RenderCopy(renderer, tex->getSDLTexture(), NULL, &tex->rect1);
+		for (int j = 0; j < 2; j++)
+		{
+			auto aaa = tex->sdlTextures;
+
+			if (t % 50 == 0)
+			{
+				k++;
+				k %= 2;
+				SDL_RenderCopy(renderer, aaa[k], NULL, &tex->textureRect);
+
+			}
+
+		}
 	}
 
 	//Renderer'ý ekranda göster

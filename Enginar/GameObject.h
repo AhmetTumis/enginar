@@ -14,7 +14,9 @@ class GameObject
 public:
 	void init();
 	Transform* getTransform() { return transformComponent; };
-	void AddComponent(any component);
+	void addComponent(any component);
+	void update();
+
 private:
 	Texture* textureComponent = nullptr;
 	Transform* transformComponent = nullptr;

@@ -9,20 +9,30 @@ Game::Game()
 Game::~Game()
 {
 }
-Texture* myTexture = nullptr;
+GameObject* go = nullptr;
 void Game::initializeGame(Window* _window)
 {
 	//Window'u eþitle
 	window = _window;
 
-	GameObject* go = new GameObject();
+	go = new GameObject();
 	go->init();
-	myTexture = new Texture("assets/k.png");
-	go->AddComponent(make_any<Texture*>(myTexture));
-	myTexture->setScale(300);
+	const char* paths[2];
 
+	paths[0] = "assets/k.png";
+	paths[1] = "assets/char.png";
+
+	Texture* myTexture = new Texture(paths);
+
+	go->addComponent(make_any<Texture*>(myTexture));
+	go->getTransform()->setScale(300);
+	myTexture->textureRect.w = myTexture->textureRect.h = 300;
+	gameObjects.push_back(go);
+	
 	loop();
 }
+
+SDL_Event event;
 
 //Gameloop
 void Game::loop()
@@ -30,11 +40,29 @@ void Game::loop()
 	int i = 0;
 	while (true)
 	{
-		i++;
-		if (i % 15 == 0)
+		while (SDL_PollEvent(&event))
 		{
-			//myTexture->setPositionX();
+			switch (event.type)
+			{
+			case SDL_KEYDOWN:
+				if (event.key.keysym.sym == SDLK_DOWN)
+				{
+					go->getTransform()->setPositionX();
+				}
+				break;
+			case SDL_MOUSEBUTTONUP:
+				if (event.button.button == SDL_BUTTON_LEFT)
+				{
+				}
+				break;
+			}
 		}
+
+		for (int i = 0; i < gameObjects.size(); i++)
+		{
+			gameObjects[i]->update();
+		}
+
 		window->render();
 	}
 }

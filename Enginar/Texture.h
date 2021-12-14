@@ -2,23 +2,21 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "EnginarMath.h"
+#include <vector>
 
 class Texture
 {
 public:
-	Texture(const char* path);
+	Texture(const char* _paths[]);
 	void init();
-	void setScale(int size);
-	void setScale(vector2& newScale);
-	void setScaleX(int x);
-	void setScaleY(int y);
-	SDL_Rect rect1;
 
-	SDL_Texture* getSDLTexture() { return sdlTexture; };
+	SDL_Rect textureRect;
+
+	SDL_Texture* getSDLTextures() { return *sdlTextures; };
+	SDL_Texture* sdlTextures[100];
 
 private:
-	SDL_Texture* sdlTexture;
-	const char* path = "";
+	const char* paths[100];
 	bool initialized = false;
 
 };

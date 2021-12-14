@@ -5,10 +5,10 @@
 //Bu da içerisinde position, rotation ve scale tutar
 void GameObject::init()
 {
-	AddComponent(make_any<Transform*>(new Transform()));
+	addComponent(make_any<Transform*>(new Transform()));
 }
 
-void GameObject::AddComponent(any component)
+void GameObject::addComponent(any component)
 {
 	if (component.type() == typeid(Transform*))
 	{
@@ -18,5 +18,14 @@ void GameObject::AddComponent(any component)
 	{
 		textureComponent = any_cast<Texture*>(component);
 		textureComponent->init();
+	}
+}
+
+void GameObject::update() 
+{
+	if (textureComponent != nullptr && transformComponent != nullptr)
+	{
+		textureComponent->textureRect = transformComponent->rect1;
+
 	}
 }
