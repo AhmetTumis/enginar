@@ -5,11 +5,10 @@ Transform::Transform()
 	rect1.x = 0;
 	rect1.y = 0;
 
-	position = new vector2();
-	scale = new vector2();
-	forward = new vector2(cos((rotation < 0 ? 360 + rotation : rotation) * PI / 180), sin((rotation < 0 ? 360 + rotation : rotation) * PI / 180));
-	float upRot = rotation - 90;
-	up = new vector2(cos((upRot < 0 ? 360 + upRot : upRot) * PI / 180), sin((upRot < 0 ? 360 + upRot : upRot) * PI / 180));
+	position = new VEC2_ZERO;
+	scale = new VEC2_ZERO;
+	forward = new VEC2_RIGHT;
+	up = new VEC2_DOWN;
 }
 
 void Transform::setPosition(vector2* newPosition)
