@@ -1,4 +1,4 @@
-#ifndef MATH_H
+/*#ifndef MATH_H
 #define MATH_H
 
 #include <climits> 
@@ -65,3 +65,5 @@ inline float fastInverseSqrt(float x)
 }
 
 #endif // MATHATH_H
+
+*/
