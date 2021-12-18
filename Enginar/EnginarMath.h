@@ -23,7 +23,12 @@
 #define MATH_TORAD(x)	(float)(x*MATH_TORAD)
 #define MATH_TODEG(x)	(float)(x*MATH_TODEG)
 
-
+#define VEC2_ZERO vector2(0, 0)
+#define VEC2_ONE vector2(1, 1)
+#define VEC2_UP vector2(0, 1)
+#define VEC2_RIGHT vector2(1, 0)
+#define VEC2_DOWN vector2(0, -1)
+#define VEC2_LEFT vector2(-1, 0)
 
 struct vector2 
 {

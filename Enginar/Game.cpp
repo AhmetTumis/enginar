@@ -63,10 +63,11 @@ void Game::loop()
 			}
 			if (inputManager.getKeyState(SDLK_UP))
 			{
-				auto pos = *go->getTransform()->getPosition();
-				auto dir = *go->getTransform()->getUp();
-				go->getTransform()->setPosition(pos + dir);
-				printf("%f", go->getTransform()->getForward()->getAngle(*go->getTransform()->getUp()));
+				/*auto pos = *go->getTransform()->getPosition();
+				auto dir = *go->getTransform()->getForward();
+				go->getTransform()->setPosition(pos + dir);*/
+
+				go->getTransform()->setPositionY(go->getTransform()->getPositionY() - 1);
 			}
 			if (inputManager.getKeyState(SDLK_DOWN))
 			{
