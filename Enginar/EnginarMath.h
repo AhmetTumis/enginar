@@ -127,6 +127,11 @@ struct vector2
 		return *this / getMagnitude();
 	}
 
+	float getDistance(vector2 b)
+	{
+		return (b - *this)->getMagnitude();
+	}
+
 };
 
 struct Rect
