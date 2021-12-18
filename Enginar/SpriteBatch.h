@@ -1,28 +1,27 @@
 #pragma once
 #include "Texture.h"
 
-/* TODO */
 class Sprite
 {
 public:
+	void Sprite(); // creates main head layer (with its parent=null)
+    
     struct TextureNode{ // "image_001.png" -> "image_002" -> ... -> "image_001.png"
         Texture texture;
-        struct TextureNode *next;
+        struct TextureNode* next;
     };
 
     struct Layer // contains circular linked list of TextureNodes
     {
-        struct Layer *parent; // can be null
-        TextureNode head;
+        struct Layer* parent; // can be null
+        TextureNode* head;
     };
 
-	void init(); // creates main head layer (with its parent=null)
     
-    TextureNode createTextureNode(const char* _path);
+    TextureNode createTextureNode(const char* _path, TextureNode* next=nullptr);
     TextureNode createTextureNode();
 
-    Layer createLayer();
-    Layer createLayer(const char* _paths[]);
+    Layer createLayer(const char* _path=nullptr);
 
     // ADD to Layer
     bool add(Layer head, const char* _path, int index=-1);          // TEST add single 
