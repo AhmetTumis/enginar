@@ -12,15 +12,19 @@ Window::~Window()
 
 void Window::initializeWindow(const char* title, int x, int y, bool isFullScreen)
 {
-	//Init kýsmý
+	//Init kï¿½smï¿½
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Enginar", x, y, WindowConstants::windowWidth, WindowConstants::windowHeight, SDL_WINDOW_SHOWN);
+	
 	renderer = SDL_CreateRenderer(window, -1, 0);
+
+	//caption
+	SDL_WM_SetCaption(title, "radish.bmp");
 
 	//Arkaplan rengi
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
-	//Fullscreen olup olmamasý
+	//Fullscreen olup olmamasï¿½
 	SDL_SetWindowFullscreen(window, isFullScreen ? SDL_WINDOW_FULLSCREEN : 0);
 
 }
@@ -35,9 +39,9 @@ int k = 0, t = 0;
 void Window::render()
 {
 	t++;
-	//Önceki frame'i temizle
+	//ï¿½nceki frame'i temizle
 	SDL_RenderClear(renderer);
-	//Yeni frame'de texture'larý render'la
+	//Yeni frame'de texture'larï¿½ render'la
 	for (int i = 0; i < textures.size(); i++)
 	{
 		auto tex = textures[i];
@@ -56,6 +60,6 @@ void Window::render()
 		}
 	}
 
-	//Renderer'ý ekranda göster
+	//Renderer'ï¿½ ekranda gï¿½ster
 	SDL_RenderPresent(renderer);
 }
