@@ -19,7 +19,7 @@ void Window::initializeWindow(const char* title, int x, int y, bool isFullScreen
 	renderer = SDL_CreateRenderer(window, -1, 0);
 
 	//caption
-	SDL_WM_SetCaption(title, "radish.bmp");
+	//SDL_WM_SetCaption(title, "radish.bmp");
 
 	//Arkaplan rengi
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
