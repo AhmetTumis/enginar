@@ -45,11 +45,11 @@ void Window::render()
 		{
 			auto aaa = tex->sdlTextures;
 
-			if (t % 50 == 0)
+			if (t % 1 == 0)
 			{
 				k++;
-				k %= 2;
-				SDL_RenderCopy(renderer, aaa[k], NULL, &tex->textureRect);
+				//k %= 2;
+				SDL_RenderCopyEx(renderer, aaa[0], NULL, &tex->textureRect, tex->rotation, NULL, SDL_FLIP_NONE);
 
 			}
 

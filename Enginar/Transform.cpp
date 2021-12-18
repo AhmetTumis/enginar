@@ -1,29 +1,74 @@
 #include "Transform.h"
 
-void Transform::setPositionX()
+Transform::Transform()
 {
-	xx += 50;
-	rect1.x = xx;
+	rect1.x = 0;
+	rect1.y = 0;
+
+	position = new vector2();
+	scale = new vector2();
+	forward = new vector2(cos((rotation < 0 ? 360 + rotation : rotation) * PI / 180), sin((rotation < 0 ? 360 + rotation : rotation) * PI / 180));
+	float upRot = rotation - 90;
+	up = new vector2(cos((upRot < 0 ? 360 + upRot : upRot) * PI / 180), sin((upRot < 0 ? 360 + upRot : upRot) * PI / 180));
 }
 
-void Transform::setScale(int scale)
+void Transform::setPosition(vector2* newPosition)
 {
-	rect1.w = scale;
-	rect1.h = scale;
+	position = newPosition;
+	rect1.x = (int)position->x;
+	rect1.y = (int)position->y;
 }
 
-void Transform::setScale(vector2& newScale)
+void Transform::setPositionX(float x)
 {
-	rect1.w = newScale.x;
-	rect1.h = newScale.y;
+	position->x = x;
+	rect1.x = (int)position->x;
 }
 
-void Transform::setScaleX(int x)
+void Transform::setPositionY(float y)
 {
-	rect1.w = x;
+	position->y = y;
+	rect1.y = (int)position->y;
 }
 
-void Transform::setScaleY(int y)
+void Transform::setScale(float _scale)
 {
-	rect1.h = y;
+	scale->x = _scale;
+	scale->y = _scale;
+
+	rect1.w = (int)_scale;
+	rect1.h = (int)_scale;
+}
+
+void Transform::setScale(vector2* newScale)
+{
+	scale->x = newScale->x;
+	scale->y = newScale->y;
+
+	rect1.w = (int)newScale->x;
+	rect1.h = (int)newScale->y;
+}
+
+void Transform::setScaleX(float x)
+{
+	scale->x = x;
+	rect1.w = (int)x;
+}
+
+void Transform::setScaleY(float y)
+{
+	scale->y = y;
+	rect1.h = (int)y;
+}
+
+void Transform::setRotation(int r)
+{
+	rotation = r;
+	forward->x = cos((rotation < 0 ? 360 + rotation : rotation) * PI / 180);
+	forward->y = sin((rotation < 0 ? 360 + rotation : rotation) * PI / 180);
+	float upRot = rotation - 90;
+
+	up->x = cos((upRot < 0 ? 360 + upRot : upRot) * PI / 180);
+	up->y = sin((upRot < 0 ? 360 + upRot : upRot) * PI / 180);
+
 }

@@ -26,6 +26,7 @@ void GameObject::update()
 	if (textureComponent != nullptr && transformComponent != nullptr)
 	{
 		textureComponent->textureRect = transformComponent->rect1;
+		textureComponent->rotation = transformComponent->getRotation();
 
 	}
 }

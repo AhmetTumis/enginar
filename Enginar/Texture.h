@@ -11,6 +11,7 @@ public:
 	void init();
 
 	SDL_Rect textureRect;
+	double rotation;
 
 	SDL_Texture* getSDLTextures() { return *sdlTextures; };
 	SDL_Texture* sdlTextures[100];
