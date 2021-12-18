@@ -93,6 +93,11 @@ struct vector2
 		return this;
 	}
 
+	float dotProduct(vector2 b)
+	{
+		return this->x * b.x + this->y + b.y;
+	}
+
 	float getMagnitude()
 	{
 		float sumOfSquares = x * x + y * y;
