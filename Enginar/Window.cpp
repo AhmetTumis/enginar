@@ -63,3 +63,55 @@ void Window::render()
 	//Renderer'� ekranda g�ster
 	SDL_RenderPresent(renderer);
 }
+
+
+void Window::minimize(){
+	SDL_MinimizeWindow(this->window);
+}
+void Window::maximize(){
+	SDL_MaximizeWindow(this->window);
+}
+
+void Window::restore(){
+	SDL_RestoreWindow(this->window);	
+}
+void Window::destroy(){
+	if(this->window){
+		SDL_DestroyWindow(this->window);
+		this->window = nullptr;
+	}
+	if(this->renderer){
+		SDL_DestroyRenderer(this->renderer);
+		this->renderer = nullptr;
+	}
+}
+
+void Window::resize(std::string, unsigned int width, unsigned int height){
+	this->destroy();
+
+	SDL_CreateWindowAndRenderer(0,0,SDL_WINDOW_FULLSCREEN_DESKTOP, &(this->window), &(this->renderer));
+
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+	SDL_RenderSetLogicalSize(this->renderer, width, height);
+
+	//this->setTitle(title);
+
+	//this->surface  = SDL_GetWindowSurface(this->window);
+    //if (!(this->surface))
+	  //  return;
+
+    //this->width  = width;
+    //this->height = height;
+	//*s/
+}
+
+bool Window::toggleFullScreen(){
+
+	return true;
+}
+
+void Window::setTitle(std::string title)
+{
+	if (this->window)
+		SDL_SetWindowTitle(this->window, title.c_str());
+}

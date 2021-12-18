@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include <vector>
 #include "Texture.h"
+#include <string>
 
 using namespace std;
 
@@ -14,9 +15,16 @@ public:
 
 	void initializeWindow(const char* title, int x, int y, bool isFullscreen = false);
 	
+	void destroy(); // yok et
+	void resize(std::string title, unsigned int width, unsigned int height); 
+	void minimize();
+	void maximize();
+	void restore();
+	bool toggleFullScreen();
+	void center();
+	void move(int x, int y);
 	
-	//void SDL_WM_SetCaption(const char *title, const char *icon);
-	//void SDL_WM_SetIcon(SDL_Surface *icon, Uint8 *mask);
+	void setTitle(std::string title);
 
 
 	void addTexture(Texture* texture);
