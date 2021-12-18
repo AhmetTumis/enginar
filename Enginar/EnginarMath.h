@@ -98,6 +98,16 @@ struct vector2
 		return this->x * b.x + this->y + b.y;
 	}
 
+	float crossProduct(vector2 b)
+	{
+		return this->getMagnitude() * b.getMagnitude() * sin(getAngle(b));
+	}
+
+	float getAngle(vector2 b)
+	{
+		return acosf(this->crossProduct(b) / (this->getMagnitude() * b.getMagnitude()));
+	}
+
 	float getMagnitude()
 	{
 		float sumOfSquares = x * x + y * y;
