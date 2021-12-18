@@ -15,8 +15,8 @@ public:
 	void initializeWindow(const char* title, int x, int y, bool isFullscreen = false);
 	
 	
-	void SDL_WM_SetCaption(const char *title, const char *icon);
-	void SDL_WM_SetIcon(SDL_Surface *icon, Uint8 *mask);
+	//void SDL_WM_SetCaption(const char *title, const char *icon);
+	//void SDL_WM_SetIcon(SDL_Surface *icon, Uint8 *mask);
 
 
 	void addTexture(Texture* texture);

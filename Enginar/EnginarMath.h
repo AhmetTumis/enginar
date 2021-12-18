@@ -95,7 +95,7 @@ struct vector2
 
 	float dotProduct(vector2 b)
 	{
-		return this->x * b.x + this->y + b.y;
+		return this->x * b.x + this->y * b.y;
 	}
 
 	float crossProduct(vector2 b)
@@ -105,7 +105,7 @@ struct vector2
 
 	float getAngle(vector2 b)
 	{
-		return acosf(this->crossProduct(b) / (this->getMagnitude() * b.getMagnitude()));
+		return acosf(this->dotProduct(b) / (this->getMagnitude() * b.getMagnitude()));;
 	}
 
 	float getMagnitude()
