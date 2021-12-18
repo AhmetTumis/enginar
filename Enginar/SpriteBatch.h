@@ -22,6 +22,8 @@ public:
     bool add(Layer head, int index, TextureNode texture);  
 	bool addLayer(Layer head, Layer layer);
 
+    int getCount() const;
+
     void clear(Layer layer); // clear layer
     void clearAll();         // clear all
 };
