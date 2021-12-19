@@ -35,7 +35,6 @@ Layer* Sprite::createLayer(const char* layerName, const char* texturePaths[])
     {
         TextureNode* _texture = this->createTextureNode(texturePaths[i]);
         this->add(_layer, _texture);
-        cout << _layer->head->texture << endl;
     }
     layers[layerName] = *_layer;
     return _layer;
