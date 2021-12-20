@@ -1,5 +1,7 @@
 #pragma once
 #include <unordered_map>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -28,11 +30,11 @@ public:
 
     TextureNode* createTextureNode(const char* _path);
     Layer* createLayer(const char* layerName, TextureNode* headTextureNode);
-    Layer* createLayer(const char* layerName, const char* texturePaths[]);
+    Layer* createLayer(const char* layerName, vector<const char*> texturePaths);
 
     void add(Layer* layer, TextureNode* texture);
     void add(Layer* layer, const char* texturePath);
-    void add(Layer* layer, const char* textures[]);
+    void add(const char* layerName, const char* _path);
 
     void addLayer(Layer* parent, Layer* layer); // simdilik isimiz yok.
 

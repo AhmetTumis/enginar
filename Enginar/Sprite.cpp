@@ -1,6 +1,4 @@
 #include "Sprite.h"
-#include <iostream>
-#include <unordered_map>
 
 using namespace std;
 
@@ -26,14 +24,13 @@ Layer* Sprite::createLayer(const char* layerName, TextureNode* headTextureNode)
     return _layer;
 };
 
-Layer* Sprite::createLayer(const char* layerName, const char* texturePaths[])
+Layer* Sprite::createLayer(const char* layerName, vector<const char*> texturePaths)
 {
     Layer* _layer = nullptr;
     _layer = new Layer();
-    // for (const char* item : texturePaths) this->add(_layer, item);
-    for (int i = 0; i < 5; i++)
+    for (auto texturePath : texturePaths)
     {
-        TextureNode* _texture = this->createTextureNode(texturePaths[i]);
+        TextureNode* _texture = this->createTextureNode(texturePath);
         this->add(_layer, _texture);
     }
     layers[layerName] = *_layer;
@@ -49,17 +46,27 @@ void Sprite::add(Layer* layer, TextureNode* texture)
     }
     else 
     {
+        texture->next = layer->tail->next;
         layer->tail->next = texture;
         layer->tail = texture;
+        layer->tail->next = layer->head;
     }
 };
 
-void Sprite::add(Layer* layer, const char* texturePath)
+void Sprite::add(Layer* layer, const char* _path)
 {
-    TextureNode _texture = { texture: texturePath };
-    this->add(layer, &_texture);
+    TextureNode* _texture = this->createTextureNode(_path);
+    this->add(layer, _texture);
 };
 
+void Sprite::add(const char* layerName, const char* _path)
+{
+    if(layers.count(layerName))
+    {
+        Layer* _layer = &layers[layerName];
+        this->add(_layer, _path);
+    };
+};
 
 void Sprite::setCurrentLayer(Layer* layer)
 {
