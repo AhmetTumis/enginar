@@ -1,7 +1,7 @@
 #pragma once
 #include "SDL.h"
 #include "SDL_image.h"
-#include "EnginarMath.h"
+#include "../common/EnginarMath.h"
 #include <vector>
 
 class Texture

@@ -1,5 +1,5 @@
 #include "Window.h"
-#include "Constants.h"
+#include "../common/Constants.h"
 #include "TextureManager.h"
 
 Window::Window()

@@ -1,8 +1,8 @@
 #include "GameObject.h"
-#include "Texture.h"
+#include "../graphics/Texture.h"
 
-//Transformation'ý yaratýr
-//Bu da içerisinde position, rotation ve scale tutar
+//Transformation'ï¿½ yaratï¿½r
+//Bu da iï¿½erisinde position, rotation ve scale tutar
 void GameObject::init()
 {
 	addComponent(make_any<Transform*>(new Transform()));

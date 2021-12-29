@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Window.h"
+#include "../graphics/Window.h"
 #include "SDL_image.h"
-#include "GameObject.h"
+#include "../common/GameObject.h"
 
 class Game
 {

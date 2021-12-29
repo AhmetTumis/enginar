@@ -1,7 +1,7 @@
 #include "Game.h"
-#include "Texture.h"
+#include "../graphics/Texture.h"
 #include "GameObject.h"
-#include "InputManager.h"
+#include "../io/InputManager.h"
 
 Game::Game()
 {
@@ -14,7 +14,7 @@ GameObject* go = nullptr;
 InputManager inputManager;
 void Game::initializeGame(Window* _window)
 {
-	//Window'u eþitle
+	//Window'u eï¿½itle
 	window = _window;
 
 	go = new GameObject();

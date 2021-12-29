@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "Transform.h"
-#include "Texture.h"
+#include "../graphics/Texture.h"
 
 using namespace std;
 
