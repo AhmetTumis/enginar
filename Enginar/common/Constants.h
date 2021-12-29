@@ -4,6 +4,6 @@
 
 namespace WindowConstants 
 {
-	constexpr int windowWidth = 1600;
-	constexpr int windowHeight = 900;
+	int windowWidth = 1600;
+	int windowHeight = 900;
 }
