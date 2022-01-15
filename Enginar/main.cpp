@@ -1,7 +1,7 @@
 #include "SDL.h"
-#include "Window.h"
-#include "Game.h"
-#include "TextureManager.h"
+#include "graphics/Window.h"
+#include "common/Game.h"
+#include "graphics/TextureManager.h"
 
 Game* game = nullptr;
 
