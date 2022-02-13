@@ -19,14 +19,26 @@ void GameObject::addComponent(any component)
 		textureComponent = any_cast<Texture*>(component);
 		textureComponent->init();
 	}
+	if (component.type() == typeid(Sprite*))
+	{
+		spriteComponent = any_cast<Sprite*>(component);
+		textureComponent = spriteComponent->currentTexture->texture;
+	}
 }
 
 void GameObject::update() 
 {
 	if (textureComponent != nullptr && transformComponent != nullptr)
 	{
+		if (spriteComponent != nullptr)
+		{
+			textureComponent = spriteComponent->currentTexture->texture;
+			spriteComponent->currentTexture->texture->render = false;
+			spriteComponent->currentTexture = spriteComponent->currentTexture->next;
+			spriteComponent->currentTexture->texture->render = true;
+		}
+
 		textureComponent->textureRect = transformComponent->rect1;
 		textureComponent->rotation = transformComponent->getRotation();
-
 	}
 }

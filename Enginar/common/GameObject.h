@@ -6,6 +6,7 @@
 #include <vector>
 #include "Transform.h"
 #include "../graphics/Texture.h"
+#include "../graphics/Sprite.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 
 private:
 	Texture* textureComponent = nullptr;
+	Sprite* spriteComponent = nullptr;
 	Transform* transformComponent = nullptr;
 };
 

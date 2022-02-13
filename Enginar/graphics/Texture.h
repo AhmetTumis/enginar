@@ -7,17 +7,19 @@
 class Texture
 {
 public:
-	Texture(const char* _paths[]);
+	Texture(const char* _paths);
 	void init();
 
 	SDL_Rect textureRect;
 	double rotation;
 
-	SDL_Texture* getSDLTextures() { return *sdlTextures; };
-	SDL_Texture* sdlTextures[100];
+	SDL_Texture* getSDLTextures() { return sdlTexture; };
+	SDL_Texture* sdlTexture;
+
+	bool render = true;
 
 private:
-	const char* paths[100];
+	const char* path;
 	bool initialized = false;
 
 };

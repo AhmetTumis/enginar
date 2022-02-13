@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "../common/Constants.h"
+#include "../common/Game.h"
 #include "TextureManager.h"
 
 Window::Window()
@@ -45,19 +46,10 @@ void Window::render()
 	for (int i = 0; i < textures.size(); i++)
 	{
 		auto tex = textures[i];
-		for (int j = 0; j < 2; j++)
-		{
-			auto aaa = tex->sdlTextures;
+		if (!tex->render)
+			continue;
 
-			if (t % 1 == 0)
-			{
-				k++;
-				//k %= 2;
-				SDL_RenderCopyEx(renderer, aaa[0], NULL, &tex->textureRect, tex->rotation, NULL, SDL_FLIP_NONE);
-
-			}
-
-		}
+		SDL_RenderCopyEx(renderer, tex->sdlTexture, NULL, &tex->textureRect, tex->rotation, NULL, SDL_FLIP_NONE);
 	}
 
 	//Renderer'� ekranda g�ster

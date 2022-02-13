@@ -45,10 +45,7 @@ typedef struct Matrix
 			data[i] = (int*)malloc(sizeof(int) * n);
 			for (int j = 0; j < n; j++)
 			{
-				if (i % 2 == 0)
-					data[i][j] = 3;
-				else
-					data[i][j] = 4;
+				data[i][j] = 0;
 			}
 		}
 	}
@@ -59,7 +56,7 @@ typedef struct Matrix
 		{
 			for (int j = 0; j < n; j++)
 			{
-				printf("%d,", [i][j]);
+				printf("%d,", data[i][j]);
 			}
 			printf("\n");
 		}

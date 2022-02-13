@@ -1,24 +1,17 @@
 #include "Texture.h"
 #include "TextureManager.h"
 
-Texture::Texture(const char* _paths[])
+Texture::Texture(const char* _path)
 {
-	for (int i=0; i < 2; i++)
-	{
-		paths[i] = _paths[i];
-	}
+	path = _path;
 }
 
 void Texture::init()
 {
-	for (int i = 0; i < 2; i++)
-	{
-		SDL_Surface* textureSurface = IMG_Load(paths[i]);
-		sdlTextures[i] = (SDL_CreateTextureFromSurface(TextureManager::getInstance()->getWindow()->getRenderer(), textureSurface));
-		SDL_FreeSurface(textureSurface);
-		TextureManager::getInstance()->addTextureToWindow(this);
-	}
-
+	SDL_Surface* textureSurface = IMG_Load(path);
+	sdlTexture = (SDL_CreateTextureFromSurface(TextureManager::getInstance()->getWindow()->getRenderer(), textureSurface));
+	SDL_FreeSurface(textureSurface);
+	TextureManager::getInstance()->addTextureToWindow(this);
 
 	initialized = true;
 }

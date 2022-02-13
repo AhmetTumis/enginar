@@ -2,12 +2,14 @@
 #include <unordered_map>
 #include <vector>
 #include <iostream>
+#include "Texture.h"
 
 using namespace std;
 
 struct TextureNode
 {
-    const char* texture;
+    const char* texturePath;
+    Texture* texture;
     struct TextureNode* next;
 };
 
@@ -41,7 +43,7 @@ public:
     void setCurrentLayer(Layer* layer);
     void setCurrentLayer(const char* layerName);
 
-    void getInfo();
+    void printInfo();
     void getLayerInfo(Layer layer);
 
     void clear(Layer layer);

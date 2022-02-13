@@ -27,7 +27,7 @@ int mainn()
 
     int i = 0;
     while(i < 16){
-        cout << i << "\t" << cur->texture << endl; // cur = playerAdventurer.currentTexture
+        cout << i << "\t" << cur->texturePath << endl; // cur = playerAdventurer.currentTexture
         cur = cur->next;
         i++;
     }

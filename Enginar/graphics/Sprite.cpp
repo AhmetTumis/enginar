@@ -8,8 +8,10 @@ TextureNode* Sprite::createTextureNode(const char* _path)
 {
     TextureNode* _textureNode = nullptr;
     _textureNode = new TextureNode();
-    _textureNode->texture = _path;
-    
+    _textureNode->texturePath = _path;
+    _textureNode->texture = new Texture(_path);
+    _textureNode->texture->init();
+
     return _textureNode;
 };
 
@@ -83,7 +85,7 @@ void Sprite::setCurrentLayer(const char* layerName)
     };
 };
 
-void Sprite::getInfo(){
+void Sprite::printInfo(){
     for (auto item : layers)
         cout << item.first << " head: " << item.second.head << endl;
 };
