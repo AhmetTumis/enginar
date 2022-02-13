@@ -24,6 +24,18 @@ void GameObject::addComponent(any component)
 		spriteComponent = any_cast<Sprite*>(component);
 		textureComponent = spriteComponent->currentTexture->texture;
 	}
+	if (component.type() == typeid(Collider*))
+	{
+		colliderComponent = any_cast<Collider*>(component);
+	}
+}
+
+any GameObject::getComponent(const type_info& componentType)
+{
+	if (componentType == typeid(Transform*))
+	{
+		return (transformComponent);
+	}
 }
 
 void GameObject::update() 
@@ -36,6 +48,8 @@ void GameObject::update()
 			spriteComponent->currentTexture->texture->render = false;
 			spriteComponent->currentTexture = spriteComponent->currentTexture->next;
 			spriteComponent->currentTexture->texture->render = true;
+
+			colliderComponent->colliderRect = spriteComponent->currentTexture->texture->textureRect;
 		}
 
 		textureComponent->textureRect = transformComponent->rect1;

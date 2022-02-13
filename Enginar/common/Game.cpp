@@ -43,6 +43,13 @@ void Game::initializeGame(Window* _window)
 
 	go->addComponent(make_any<Sprite*>(playerAdventurer));
 	go->getTransform()->setScale(300);
+
+	auto rect = (any_cast<Transform*>(go->getComponent(typeid(Transform*))))->rect1;
+
+	Collider* col = new Collider("", rect);
+
+	go->addComponent(make_any<Collider*>(col));
+
 	gameObjects.push_back(go);
 
 	inputManager;
