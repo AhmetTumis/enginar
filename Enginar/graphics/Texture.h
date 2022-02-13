@@ -7,7 +7,7 @@
 class Texture
 {
 public:
-	Texture(const char* _paths);
+	Texture(const char* _path);
 	void init();
 
 	SDL_Rect textureRect;

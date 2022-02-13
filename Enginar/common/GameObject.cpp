@@ -36,6 +36,10 @@ any GameObject::getComponent(const type_info& componentType)
 	{
 		return (transformComponent);
 	}
+	if (componentType == typeid(Collider*))
+	{
+		return (colliderComponent);
+	}
 }
 
 void GameObject::update() 

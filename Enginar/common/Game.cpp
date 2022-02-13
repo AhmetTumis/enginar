@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "../io/InputManager.h"
 #include "../graphics/Sprite.h"
+#include "../physics/Collision.h"
 
 Game::Game()
 {
@@ -12,20 +13,16 @@ Game::~Game()
 {
 }
 GameObject* go = nullptr;
+GameObject* go2 = nullptr;
 InputManager inputManager;
 void Game::initializeGame(Window* _window)
 {
 	//Window'u e�itle
 	window = _window;
 
+#pragma region TEST_GAME
 	go = new GameObject();
 	go->init();
-	/*const char* paths[2];
-
-	paths[0] = "assets/squareheadchineseguy.png";
-	paths[1] = "assets/char.png";
-
-	Texture* myTexture = new Texture(paths);*/
 
 	Sprite* playerAdventurer = new Sprite();
 
@@ -38,7 +35,7 @@ void Game::initializeGame(Window* _window)
 
 	Layer* layerIDLE = playerAdventurer->createLayer("IDLE", idleSprites);
 
-	playerAdventurer->add(layerIDLE, "assets/adventurer-idle-2-XX.png");
+	//playerAdventurer->add(layerIDLE, "assets/adventurer-idle-2-XX.png");
 	playerAdventurer->setCurrentLayer("IDLE");
 
 	go->addComponent(make_any<Sprite*>(playerAdventurer));
@@ -52,8 +49,25 @@ void Game::initializeGame(Window* _window)
 
 	gameObjects.push_back(go);
 
-	inputManager;
-	
+	go2 = new GameObject();
+	go2->init();
+
+	auto tex = new Texture("assets/char.png");
+
+	go2->addComponent(make_any<Texture*>(tex));
+
+	go2->getTransform()->setScale(300);
+	go2->getTransform()->setPositionX(300);
+
+	auto rect2 = (any_cast<Transform*>(go2->getComponent(typeid(Transform*))))->rect1;
+
+	Collider* col2 = new Collider("", rect2);
+
+	go2->addComponent(make_any<Collider*>(col2));
+
+	gameObjects.push_back(go2);
+#pragma endregion
+
 	loop();
 }
 
@@ -132,6 +146,14 @@ void Game::loop()
 			}
 
 			window->render();
+
+			auto col1 = (any_cast<Collider*>(go->getComponent(typeid(Collider*))));
+			auto col2 = (any_cast<Collider*>(go2->getComponent(typeid(Collider*))));
+
+			if (Collision::isCollidingAABB(*col1,*col2))
+			{
+				printf("çarpışış");
+			}
 		}
 		
 	}
