@@ -7,6 +7,12 @@ Game* game = nullptr;
 
 int main(int argc, char* argv[])
 {
+	Matrix m1 = Matrix(2, 2);
+
+	(m1.Inverse()).printMatrix();
+
+	return 0;
+
 	Window* window = new Window();
 	TextureManager::getInstance()->SetWindow(window);
 
