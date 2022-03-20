@@ -4,6 +4,7 @@
 #include "../io/InputManager.h"
 #include "../graphics/Sprite.h"
 #include "../physics/Collision.h"
+#include "../common/Vector.h"
 
 Game::Game()
 {
@@ -43,9 +44,9 @@ void Game::initializeGame(Window* _window)
 
 	auto rect = (any_cast<Transform*>(go->getComponent(typeid(Transform*))))->rect1;
 
-	Collider* col = new Collider("", rect);
+	CircleCollider* col = new CircleCollider("", 15);
 
-	go->addComponent(make_any<Collider*>(col));
+	go->addComponent(make_any<Collider*>(dynamic_cast<Collider*>(col)));
 
 	gameObjects.push_back(go);
 
@@ -61,9 +62,9 @@ void Game::initializeGame(Window* _window)
 
 	auto rect2 = (any_cast<Transform*>(go2->getComponent(typeid(Transform*))))->rect1;
 
-	Collider* col2 = new Collider("", rect2);
+	CircleCollider* col2 = new CircleCollider("", 15);
 
-	go2->addComponent(make_any<Collider*>(col2));
+	go2->addComponent(make_any<Collider*>(dynamic_cast<Collider*>(col2)));
 
 	gameObjects.push_back(go2);
 #pragma endregion
@@ -111,11 +112,15 @@ void Game::loop()
 			}
 			if (inputManager.getKeyState(SDLK_KP_PLUS))
 			{
-				go->getTransform()->setScale(*go->getTransform()->getScale() * 1.01f);
+				auto s1 = *go->getTransform()->getScale();
+				auto t = s1 + vector2(1,1);
+				auto xx = t.data[0][0];
+				auto yy = t.data[0][1];
+				go->getTransform()->setScale(&t);
 			}
 			if (inputManager.getKeyState(SDLK_KP_MINUS))
 			{
-				go->getTransform()->setScale(*go->getTransform()->getScale() / 1.0025f);
+				//go->getTransform()->setScale(*go->getTransform()->getScale() / 1.0025f);
 			}
 			if (inputManager.getKeyState(SDLK_q))
 			{
@@ -147,10 +152,10 @@ void Game::loop()
 
 			window->render();
 
-			auto col1 = (any_cast<Collider*>(go->getComponent(typeid(Collider*))));
-			auto col2 = (any_cast<Collider*>(go2->getComponent(typeid(Collider*))));
+			auto col1 = dynamic_cast<CircleCollider*>(any_cast<Collider*>(go->getComponent(typeid(Collider*))));
+			auto col2 = dynamic_cast<CircleCollider*>(any_cast<Collider*>(go2->getComponent(typeid(Collider*))));
 
-			if (Collision::isCollidingAABB(*col1,*col2))
+			if (Collision::isCollidingCircleAndCircle(*col1,*col2))
 			{
 				printf("çarpışış");
 			}

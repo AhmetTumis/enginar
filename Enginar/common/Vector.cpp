@@ -1,21 +1,22 @@
-#include<Vector.h>
+#include "Vector.h"
+#include <math.h>
 
-struct vector2
-{
 	float x, y, magnitude = 0;
-	vector2()
+	vector2::vector2() :Matrix(2, 1)
 	{
 		this->x = 0;
 		this->y = 0;
 		this->magnitude = 0;
 	}
-	vector2(float _x, float _y)
+	vector2::vector2(float _x, float _y) :Matrix(2, 1)
 	{
 		this->x = _x;
 		this->y = _y;
+		this->Matrix::data[0][0] = _x;
+		this->Matrix::data[1][0] = _y;
 	}
 
-	bool operator==(vector2 b)
+	/*bool operator==(vector2 b)
 	{
 		return (this->x == b.x && this->y == b.y);
 	}
@@ -66,82 +67,47 @@ struct vector2
 		this->x /= b;
 		this->y /= b;
 		return this;
-	}
+	}*/
 
-	float dotProduct(vector2 b)
+	float vector2::dotProduct(vector2 b)
 	{
-		return this->x * b.x + this->y * b.y;
+		return x * b.x + y * b.y;
 	}
 
-	float crossProduct(vector2 b)
+	float vector2::crossProduct(vector2 b)
 	{
-		return this->getMagnitude() * b.getMagnitude() * sin(getAngle(b));
+		return getMagnitude() * b.getMagnitude() * sin(getAngle(b));
 	}
 
-	float getAngle(vector2 b)
+	float vector2::getAngle(vector2 b)
 	{
-		return acosf(this->dotProduct(b) / (this->getMagnitude() * b.getMagnitude()));;
+		return acosf(dotProduct(b) / (getMagnitude() * b.getMagnitude()));;
 	}
 
-	float getMagnitude()
+	float vector2::getMagnitude()
 	{
 		float sumOfSquares = x * x + y * y;
 		magnitude = sqrt(sumOfSquares);
 		return magnitude;
 	}
 
-	void Normalize()
+	void vector2::Normalize()
 	{
-		auto c = *this / getMagnitude();
-		this->x = c->x;
-		this->y = c->y;
+		auto c = (*this) / getMagnitude();
+		this->x = c.data[0][0];
+		this->y = c.data[0][1];
 	}
 
-	vector2* getNormalized()
+	vector2 vector2::getNormalized()
 	{
-		return *this / getMagnitude();
+		auto div = *this / getMagnitude();
+		return vector2(div.data[0][0], div.data[0][1]);
 	}
 
-	float getDistance(vector2 b)
+	float vector2::getDistance(vector2 b)
 	{
-		return (b - *this)->getMagnitude();
+		auto aa = (b - *this);
+		auto k = dynamic_cast<vector2*>(&aa);
+		vector2 vec = vector2(k->x, k->y);
+		return vec.getMagnitude();
 	}
-
-};
-
-struct Rect
-{
-	int x, y;
-	int w, h;
-
-	bool operator == (const Rect& rhs) const
-	{
-		return x == rhs.x && y == rhs.y && w == rhs.w && h == rhs.h;
-	}
-};
-
-inline int nextP2(int x)
-{
-	x += (x == 0);
-	x--;
-	for (unsigned int i = 1; i < sizeof(int) * CHAR_BIT; i <<= 1) x |= x >> i;
-	return ++x;
-}
-
-inline float nextP2(float x)
-{
-	return (float)nextP2((int)x);
-}
-
-inline float fastInverseSqrt(float x)
-{
-	float x2 = x * 0.5F;
-	float y = x;
-	long i = *(long*)&y;
-	i = 0x5f3759df - (i >> 1);
-	y = *(float*)&i;
-
-	y *= 1.5F - x2 * y * y; 	// first iter
-	// y *= 1.5F - x2*y*y; 	// second iter...
-	return y;
-}

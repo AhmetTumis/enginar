@@ -46,6 +46,12 @@ public:
     void printInfo();
     void getLayerInfo(Layer layer);
 
+    void startUpdate();
+    void update();
+
     void clear(Layer layer);
     void clearAll();
+private:
+    int t = 0;
+    bool loop = false;
 };

@@ -35,6 +35,9 @@ void Transform::setScale(float _scale)
 	scale->x = _scale;
 	scale->y = _scale;
 
+	scale->data[0][0] = _scale;
+	scale->data[0][1] = _scale;
+
 	rect1.w = (int)_scale;
 	rect1.h = (int)_scale;
 }
@@ -43,6 +46,9 @@ void Transform::setScale(vector2* newScale)
 {
 	scale->x = newScale->x;
 	scale->y = newScale->y;
+
+	scale->data[0][0] = newScale->x;
+	scale->data[0][1] = newScale->y;
 
 	rect1.w = (int)newScale->x;
 	rect1.h = (int)newScale->y;

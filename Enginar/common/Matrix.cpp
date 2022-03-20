@@ -1,40 +1,38 @@
-#include<Matrix.h>
+#include "Matrix.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-typedef struct Matrix
-{
+
 	int m, n;
-	int** data;
-	Matrix(int _m, int _n)
+	float** data;
+	Matrix::Matrix(int _m, int _n)
 	{
 		m = _m;
 		n = _n;
-		data = (int**)malloc(sizeof(int*) * m);
+		data = (float**)malloc(sizeof(float*) * m);
 		for (int i = 0; i < m; i++)
 		{
-			data[i] = (int*)malloc(sizeof(int) * n);
+			data[i] = (float*)malloc(sizeof(float) * n);
 			for (int j = 0; j < n; j++)
 			{
-				if (i % 2 == 0)
-					data[i][j] = 3;
-				else
-					data[i][j] = 4;
+				data[i][j] = 0;
 			}
 		}
 	}
 
-	void printMatrix()
+	void Matrix::printMatrix()
 	{
 		for (int i = 0; i < m; i++)
 		{
 			for (int j = 0; j < n; j++)
 			{
-				printf("%d,", [i][j]);
+				printf("%d,", data[i][j]);
 			}
 			printf("\n");
 		}
 	}
 
-	Matrix operator + (int b)
+	Matrix Matrix::operator + (int b)
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -45,7 +43,7 @@ typedef struct Matrix
 		}
 		return *this;
 	}
-	Matrix operator - (int b)
+	Matrix Matrix::operator - (int b)
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -56,7 +54,7 @@ typedef struct Matrix
 		}
 		return *this;
 	}
-	Matrix operator * (int b)
+	Matrix Matrix::operator * (int b)
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -67,7 +65,7 @@ typedef struct Matrix
 		}
 		return *this;
 	}
-	Matrix operator / (int b)
+	Matrix Matrix::operator / (int b)
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -78,8 +76,9 @@ typedef struct Matrix
 		}
 		return *this;
 	}
-	Matrix operator + (Matrix b)
+	Matrix Matrix::operator + (Matrix b)
 	{
+
 		for (int i = 0; i < m; i++)
 		{
 			for (int j = 0; j < n; j++)
@@ -89,7 +88,7 @@ typedef struct Matrix
 		}
 		return *this;
 	}
-	Matrix operator - (Matrix b)
+	Matrix Matrix::operator - (Matrix b)
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -101,7 +100,7 @@ typedef struct Matrix
 		return *this;
 	}
 	//1.sütun=2.satýr. Sonuc=1.satýr,2.sütun
-	Matrix operator * (Matrix b)
+	Matrix Matrix::operator * (Matrix b)
 	{
 		Matrix ret = Matrix(this->m, b.n);
 		for (int i = 0; i < m; i++)
@@ -118,9 +117,9 @@ typedef struct Matrix
 		}
 		return ret;
 	}
-	Matrix Inverse()
+	Matrix Matrix::Inverse()
 	{
-		Matrix ret = Matrix(this->n, this->m);
+		Matrix ret = Matrix(n, m);
 		for (int i = 0; i < m; i++)
 		{
 			for (int j = 0; j < n; j++)
@@ -130,7 +129,7 @@ typedef struct Matrix
 		}
 		return ret;
 	}
-	void operator = (Matrix b)
+	void Matrix::operator = (Matrix b)
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -140,7 +139,7 @@ typedef struct Matrix
 			}
 		}
 	}
-	bool operator == (Matrix b)
+	bool Matrix::operator == (Matrix b)
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -154,4 +153,3 @@ typedef struct Matrix
 			return true;
 		}
 	}
-};

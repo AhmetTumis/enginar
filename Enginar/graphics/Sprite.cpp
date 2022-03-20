@@ -1,8 +1,9 @@
 #include "Sprite.h"
-
+#include<iostream>
+#include<dos.h>
 using namespace std;
 
-Sprite::Sprite() : frameWaitInterval(250), currentLayer(), currentTexture() {};
+Sprite::Sprite() : frameWaitInterval(5), currentLayer(), currentTexture() {};
 
 TextureNode* Sprite::createTextureNode(const char* _path)
 {
@@ -88,4 +89,22 @@ void Sprite::setCurrentLayer(const char* layerName)
 void Sprite::printInfo(){
     for (auto item : layers)
         cout << item.first << " head: " << item.second.head << endl;
-};
+}
+void Sprite::startUpdate()
+{
+    update();
+}
+void Sprite::update()
+{
+    if (t < frameWaitInterval)
+    {
+        t++;
+    }
+    else 
+    {
+        currentTexture->texture->render = false;
+        currentTexture = currentTexture->next;
+        currentTexture->texture->render = true;
+        t = 0;
+    }
+}

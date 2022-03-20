@@ -22,6 +22,7 @@ void GameObject::addComponent(any component)
 	if (component.type() == typeid(Sprite*))
 	{
 		spriteComponent = any_cast<Sprite*>(component);
+		spriteComponent->startUpdate();
 		textureComponent = spriteComponent->currentTexture->texture;
 	}
 	if (component.type() == typeid(Collider*))
@@ -48,14 +49,17 @@ void GameObject::update()
 	{
 		if (spriteComponent != nullptr)
 		{
-			textureComponent = spriteComponent->currentTexture->texture;
-			spriteComponent->currentTexture->texture->render = false;
-			spriteComponent->currentTexture = spriteComponent->currentTexture->next;
-			spriteComponent->currentTexture->texture->render = true;
+			//update sprite frame
+			spriteComponent->update();
 
-			colliderComponent->colliderRect = spriteComponent->currentTexture->texture->textureRect;
+			//equalize current texture to our textureComponent
+			textureComponent = spriteComponent->currentTexture->texture;
 		}
 
+		//update collider shape according to texture shape
+		colliderComponent->updateShape(textureComponent);
+
+		//update texture rect according to transform rect
 		textureComponent->textureRect = transformComponent->rect1;
 		textureComponent->rotation = transformComponent->getRotation();
 	}

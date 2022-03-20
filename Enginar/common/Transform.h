@@ -1,5 +1,6 @@
 #pragma once
 #include "EnginarMath.h"
+#include "vector.h"
 #include <SDL_video.h>
 #include <math.h>
 

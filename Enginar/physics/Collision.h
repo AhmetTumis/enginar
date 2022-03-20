@@ -4,6 +4,7 @@
 class Collision
 {
 public:
-	static bool isCollidingAABB(const Collider& first, const Collider& second);
+	static bool isCollidingAABB(const BoxCollider& first, const BoxCollider& second);
+	static bool isCollidingCircleAndCircle(const CircleCollider& first, const CircleCollider& second);
 };
 
