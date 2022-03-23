@@ -1,113 +1,105 @@
 #include "Vector.h"
 #include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-	float x, y, magnitude = 0;
-	vector2::vector2() :Matrix(2, 1)
-	{
-		this->x = 0;
-		this->y = 0;
-		this->magnitude = 0;
-	}
-	vector2::vector2(float _x, float _y) :Matrix(2, 1)
-	{
-		this->x = _x;
-		this->y = _y;
-		this->Matrix::data[0][0] = _x;
-		this->Matrix::data[1][0] = _y;
-	}
+Vector2::Vector2()
+{
+    x = 0;
+    y = 0;
+    magnitude = 1;
+}
 
-	/*bool operator==(vector2 b)
-	{
-		return (this->x == b.x && this->y == b.y);
-	}
+Vector2::Vector2(float _x, float _y, float _magnitude)
+{
+    x = _x;
+    y = _y;
+    magnitude = _magnitude;
+}
 
-	void operator=(vector2 b)
-	{
-		this->x = b.x;
-		this->y = b.y;
-	}
+Vector2 Vector2::operator + (Vector2 b) 
+{
+    return Vector2(x+b.x, y+b.y, magnitude);
+}
+Vector2 Vector2::operator - (Vector2 b)
+{
+    return Vector2(x-b.x, y-b.y, magnitude);
+}
+Vector2 Vector2::operator * (float n)
+{
+    return Vector2(x*n, y*n, magnitude);
+}
+Vector2 Vector2::operator / (float n)
+{
+    return Vector2(x/n, y/n, magnitude);
+}
 
-	vector2* operator+(float b)
-	{
-		this->x += b;
-		this->y += b;
-		return this;
-	}
+void Vector2::operator += (Vector2 b)
+{
+    x += b.x;
+    y += b.y;
+}
+void Vector2::operator -= (Vector2 b)
+{
+    x -= b.x;
+    y -= b.y;
+}
+void Vector2::operator *= (float n)
+{
+    x *= n;
+    y *= n;
+}
+void Vector2::operator /= (float n)
+{
+    x /= n;
+    y /= n;
+}
 
-	vector2* operator+(vector2 b)
-	{
-		this->x += b.x;
-		this->y += b.y;
-		return this;
-	}
+bool Vector2::operator == (Vector2 b)
+{
+    return x == b.x && y == b.y; // && magnitude == b.magnitude ?
+}
+bool Vector2::operator != (Vector2 b)
+{
+    return x != b.x || y != b.y; // || magnitude != b.magnitude ?
+}
 
-	vector2* operator-(float b)
-	{
-		this->x -= b;
-		this->y -= b;
-		return this;
-	}
+float Vector2::dotProduct(Vector2 b)
+{
+    return x*b.x + y*b.y;
+}
+float Vector2::getMagnitude()
+{
+    float sumOfSquares = x * x + y * y;
+    magnitude = sqrt(sumOfSquares);
+    return magnitude; 
+}
+float Vector2::getAngle(Vector2 b)
+{
+    return acosf(dotProduct(b) / (getMagnitude() * b.getMagnitude()));
+}
+float Vector2::crossProduct(Vector2 b)
+{
+    return getMagnitude() * b.getMagnitude() * sin(getAngle(b));
+}
+float Vector2::getDistance(Vector2 b)
+{
+    return getMagnitude() * b.getMagnitude() * sin(getAngle(b));
+}
+void Vector2::Normalize()
+{
+    float _magnitude = magnitude;
+    *this /= getMagnitude();
+    magnitude = _magnitude; // ?
+}
 
-	vector2* operator-(vector2 b)
-	{
-		this->x -= b.x;
-		this->y -= b.y;
-		return this;
-	}
+// Vector2 Vector2::getNormalized() // anlamadim
+// {
+//     Vector2 b = *this->Normalize()
+//     // return b;
+// }
 
-	vector2* operator*(float b)
-	{
-		this->x *= b;
-		this->y *= b;
-		return this;
-	}
-
-	vector2* operator/(float b)
-	{
-		this->x /= b;
-		this->y /= b;
-		return this;
-	}*/
-
-	float vector2::dotProduct(vector2 b)
-	{
-		return x * b.x + y * b.y;
-	}
-
-	float vector2::crossProduct(vector2 b)
-	{
-		return getMagnitude() * b.getMagnitude() * sin(getAngle(b));
-	}
-
-	float vector2::getAngle(vector2 b)
-	{
-		return acosf(dotProduct(b) / (getMagnitude() * b.getMagnitude()));;
-	}
-
-	float vector2::getMagnitude()
-	{
-		float sumOfSquares = x * x + y * y;
-		magnitude = sqrt(sumOfSquares);
-		return magnitude;
-	}
-
-	void vector2::Normalize()
-	{
-		auto c = (*this) / getMagnitude();
-		this->x = c.data[0][0];
-		this->y = c.data[0][1];
-	}
-
-	vector2 vector2::getNormalized()
-	{
-		auto div = *this / getMagnitude();
-		return vector2(div.data[0][0], div.data[0][1]);
-	}
-
-	float vector2::getDistance(vector2 b)
-	{
-		auto aa = (b - *this);
-		auto k = dynamic_cast<vector2*>(&aa);
-		vector2 vec = vector2(k->x, k->y);
-		return vec.getMagnitude();
-	}
+void Vector2::print()
+{
+    printf("x: %f\ny: %f\nmagnitude: %f", x, y, magnitude);
+}
