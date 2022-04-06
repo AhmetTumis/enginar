@@ -8,7 +8,7 @@
 
 
 */
-const SDL_Keycode *Keyboard::createKeyMap()
+/*const SDL_Keycode* Keyboard::createKeyMap()
 {
 	static SDL_Keycode k[Keyboard::KEY_MAX_ENUM] = {SDLK_UNKNOWN};
 
@@ -426,4 +426,4 @@ StringMap<Keyboard::Key, Keyboard::KEY_MAX_ENUM>::Entry Keyboard::keyEntries[] =
 	{"kbdillumup", Keyboard::KEY_KBDILLUMUP},
 	{"eject", Keyboard::KEY_EJECT},
 	{"sleep", Keyboard::KEY_SLEEP},
-};
+};*/

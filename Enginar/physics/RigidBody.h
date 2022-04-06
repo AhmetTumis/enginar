@@ -19,8 +19,6 @@ public:
 	RigidBody(float _mass, float _gravity = 9) {
 		mass = _mass;
 		gravity = _gravity;
-		Matrix a = Matrix(1,1);
-		auto b = a + 1;
 	}
 
 	inline void setMass(float _mass) { mass = _mass; }

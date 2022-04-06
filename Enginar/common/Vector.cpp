@@ -3,93 +3,48 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-Vector2::Vector2()
+vector2::vector2() : Matrix<vector2>(1,2)
 {
-    x = 0;
-    y = 0;
     magnitude = 1;
+    data[0][0] = 0;
+    data[0][1] = 0;
+
 }
 
-Vector2::Vector2(float _x, float _y, float _magnitude)
+vector2::vector2(float _x, float _y) : Matrix<vector2>(1, 2)
 {
-    x = _x;
-    y = _y;
-    magnitude = _magnitude;
+    magnitude = getMagnitude();
+    data[0][0] = _x;
+    data[0][1] = _y;
+
 }
 
-Vector2 Vector2::operator + (Vector2 b) 
-{
-    return Vector2(x+b.x, y+b.y, magnitude);
-}
-Vector2 Vector2::operator - (Vector2 b)
-{
-    return Vector2(x-b.x, y-b.y, magnitude);
-}
-Vector2 Vector2::operator * (float n)
-{
-    return Vector2(x*n, y*n, magnitude);
-}
-Vector2 Vector2::operator / (float n)
-{
-    return Vector2(x/n, y/n, magnitude);
-}
-
-void Vector2::operator += (Vector2 b)
-{
-    x += b.x;
-    y += b.y;
-}
-void Vector2::operator -= (Vector2 b)
-{
-    x -= b.x;
-    y -= b.y;
-}
-void Vector2::operator *= (float n)
-{
-    x *= n;
-    y *= n;
-}
-void Vector2::operator /= (float n)
-{
-    x /= n;
-    y /= n;
-}
-
-bool Vector2::operator == (Vector2 b)
-{
-    return x == b.x && y == b.y; // && magnitude == b.magnitude ?
-}
-bool Vector2::operator != (Vector2 b)
-{
-    return x != b.x || y != b.y; // || magnitude != b.magnitude ?
-}
-
-float Vector2::dotProduct(Vector2 b)
+float vector2::dotProduct(vector2 b)
 {
     return x*b.x + y*b.y;
 }
-float Vector2::getMagnitude()
+float vector2::getMagnitude()
 {
     float sumOfSquares = x * x + y * y;
     magnitude = sqrt(sumOfSquares);
     return magnitude; 
 }
-float Vector2::getAngle(Vector2 b)
+float vector2::getAngle(vector2 b)
 {
     return acosf(dotProduct(b) / (getMagnitude() * b.getMagnitude()));
 }
-float Vector2::crossProduct(Vector2 b)
+float vector2::crossProduct(vector2 b)
 {
     return getMagnitude() * b.getMagnitude() * sin(getAngle(b));
 }
-float Vector2::getDistance(Vector2 b)
+float vector2::getDistance(vector2 b)
 {
     return getMagnitude() * b.getMagnitude() * sin(getAngle(b));
 }
-void Vector2::Normalize()
+void vector2::Normalize()
 {
     float _magnitude = magnitude;
-    *this /= getMagnitude();
+    *this = (*this) / getMagnitude();
     magnitude = _magnitude; // ?
 }
 
@@ -99,7 +54,7 @@ void Vector2::Normalize()
 //     // return b;
 // }
 
-void Vector2::print()
+void vector2::print()
 {
     printf("x: %f\ny: %f\nmagnitude: %f", x, y, magnitude);
 }

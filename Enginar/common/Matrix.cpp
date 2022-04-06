@@ -1,11 +1,6 @@
 #include "Matrix.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-
-	int m, n;
-	float** data;
-	Matrix::Matrix(int _m, int _n)
+	/*Matrix::Matrix(int _m, int _n)
 	{
 		m = _m;
 		n = _n;
@@ -20,7 +15,7 @@
 		}
 	}
 
-	void Matrix::printMatrix()
+	void Matrix<T>::printMatrix()
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -65,7 +60,7 @@
 		}
 		return *this;
 	}
-	Matrix Matrix::operator / (int b)
+	T Matrix::operator / (int b)
 	{
 		for (int i = 0; i < m; i++)
 		{
@@ -152,4 +147,4 @@
 			}
 			return true;
 		}
-	}
+	}*/
