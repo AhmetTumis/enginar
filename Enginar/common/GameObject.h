@@ -8,6 +8,7 @@
 #include "../graphics/Texture.h"
 #include "../graphics/Sprite.h"
 #include "../physics/Collider.h"
+#include "../physics/RigidBody.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 	void addComponent(any component);
 	any getComponent(const type_info& componentType);
 	void update();
+	RigidBody* rigidbodyComponent = nullptr;
 
 private:
 	Texture* textureComponent = nullptr;

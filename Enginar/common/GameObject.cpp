@@ -29,6 +29,10 @@ void GameObject::addComponent(any component)
 	{
 		colliderComponent = any_cast<Collider*>(component);
 	}
+	if (component.type() == typeid(RigidBody*))
+	{
+		rigidbodyComponent = any_cast<RigidBody*>(component);
+	}
 }
 
 any GameObject::getComponent(const type_info& componentType)
@@ -58,6 +62,13 @@ void GameObject::update()
 
 		//update collider shape according to texture shape
 		colliderComponent->updateShape(textureComponent);
+
+		if (rigidbodyComponent != nullptr)
+		{
+			rigidbodyComponent->update(.1f);
+			auto a = *(transformComponent->getPosition());
+			transformComponent->setPosition(&(*(transformComponent->getPosition()) + rigidbodyComponent->getVelocity()));
+		}
 
 		//update texture rect according to transform rect
 		textureComponent->textureRect = transformComponent->rect1;

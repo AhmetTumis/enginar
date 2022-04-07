@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../common/Constants.h"
 #include "../common/Vector.h"
 #include "../common/EnginarMath.h"
-#include "../common/Constants.h"
 
 class RigidBody
 {
@@ -33,9 +33,15 @@ public:
 	void update(float deltaTime) 
 	{
 		acceleration.x = (force.x + friction.x) / mass;
-		acceleration.y = (gravity + force.y) / mass;
-		auto aa = acceleration * deltaTime;
+		acceleration.y = (-gravity + force.y) / mass;
+		
+		velocity.x += acceleration.x * deltaTime;
+		velocity.y -= acceleration.y * deltaTime;
+
+		resetForce();
 	}
+
+	inline vector2& getVelocity() { return velocity; }
 
 private:
 	float mass;

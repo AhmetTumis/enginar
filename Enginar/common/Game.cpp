@@ -5,6 +5,7 @@
 #include "../graphics/Sprite.h"
 #include "../physics/Collision.h"
 #include "../common/Vector.h"
+#include "../physics/RigidBody.h"
 
 Game::Game()
 {
@@ -47,6 +48,10 @@ void Game::initializeGame(Window* _window)
 	CircleCollider* col = new CircleCollider("", 15);
 
 	go->addComponent(make_any<Collider*>(dynamic_cast<Collider*>(col)));
+
+	RigidBody* rb = new RigidBody(1, 1.0f);
+
+	go->addComponent(make_any<RigidBody*>(dynamic_cast<RigidBody*>(rb)));
 
 	gameObjects.push_back(go);
 
@@ -120,7 +125,8 @@ void Game::loop()
 			}
 			if (inputManager.getKeyState(SDLK_KP_MINUS))
 			{
-				//go->getTransform()->setScale(*go->getTransform()->getScale() / 1.0025f);
+				auto rb = go->rigidbodyComponent;
+				rb->applyForce(VEC2_UP*3);
 			}
 			if (inputManager.getKeyState(SDLK_q))
 			{
