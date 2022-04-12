@@ -1,17 +1,23 @@
 #pragma once
-#include <map>
-#include "SDL_keycode.h"
+#include <SDL.h>
+#include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
 class InputManager
 {
 public:
-	map<SDL_Keycode, bool> keys;
+	InputManager();
 
-	inline void pressKey(SDL_Keycode key) { keys[key] = true; };
-	inline void releaseKey(SDL_Keycode key) { keys[key] = false; };
+	void ListenEvent(SDL_Event event);
 
-	inline bool getKeyState(SDL_Keycode key) { return keys[key]; };
+	bool isDown(SDL_Scancode key);
+	bool isDown(string key);
+	bool isDown(SDL_Keycode key);
+
+private:
+	void updateState();
+	const Uint8* keyStates;
+	static unordered_map<string, SDL_Scancode> keyMap;
 };
-

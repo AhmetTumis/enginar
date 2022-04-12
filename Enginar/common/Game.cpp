@@ -95,15 +95,15 @@ void Game::loop()
 			//printf("%f\n", 1000.0f / (deltaTime + .1f));
 
 #pragma region Input
-			if (inputManager.getKeyState(SDLK_RIGHT))
+			if (inputManager.isDown(SDLK_RIGHT) || inputManager.isDown("d"))
 			{
 				go->getTransform()->setPositionX(go->getTransform()->getPositionX() + 1);
 			}
-			if (inputManager.getKeyState(SDLK_LEFT))
+			if (inputManager.isDown(SDLK_LEFT) || inputManager.isDown("a"))
 			{
 				go->getTransform()->setPositionX(go->getTransform()->getPositionX() - 1);
 			}
-			if (inputManager.getKeyState(SDLK_UP))
+			if (inputManager.isDown(SDLK_UP) || inputManager.isDown("w"))
 			{
 				/*auto pos = *go->getTransform()->getPosition();
 				auto dir = *go->getTransform()->getForward();
@@ -111,11 +111,11 @@ void Game::loop()
 
 				go->getTransform()->setPositionY(go->getTransform()->getPositionY() - 1);
 			}
-			if (inputManager.getKeyState(SDLK_DOWN))
+			if (inputManager.isDown(SDLK_DOWN) || inputManager.isDown("s"))
 			{
 				go->getTransform()->setPositionY(go->getTransform()->getPositionY() + 1);
 			}
-			if (inputManager.getKeyState(SDLK_KP_PLUS))
+			if (inputManager.isDown(SDLK_KP_PLUS))
 			{
 				auto s1 = *go->getTransform()->getScale();
 				auto t = s1 + vector2(1,1);
@@ -123,32 +123,21 @@ void Game::loop()
 				auto yy = t.data[0][1];
 				go->getTransform()->setScale(&t);
 			}
-			if (inputManager.getKeyState(SDLK_KP_MINUS))
-			{
-				auto rb = go->rigidbodyComponent;
-				rb->applyForce(VEC2_UP*3);
-			}
-			if (inputManager.getKeyState(SDLK_q))
+			// if (inputManager.isDown(SDLK_KP_MINUS))
+			// {
+			// 	auto rb = go->rigidbodyComponent;
+			// 	rb->applyForce(VEC2_UP*3);
+			// }
+			if (inputManager.isDown(SDLK_q))
 			{
 				go->getTransform()->setRotation(go->getTransform()->getRotation() - 1);
 			}
-			if (inputManager.getKeyState(SDLK_e))
+			if (inputManager.isDown(SDLK_e))
 			{
 				go->getTransform()->setRotation(go->getTransform()->getRotation() + 1);
 			}
 
-			while (SDL_PollEvent(&event))
-			{
-				switch (event.type)
-				{
-				case SDL_KEYDOWN:
-					inputManager.pressKey(event.key.keysym.sym);
-					break;
-				case SDL_KEYUP:
-					inputManager.releaseKey(event.key.keysym.sym);
-					break;
-				}
-			}
+			inputManager.ListenEvent(event);
 #pragma endregion
 
 			for (int i = 0; i < gameObjects.size(); i++)
@@ -166,6 +155,6 @@ void Game::loop()
 				printf("çarpışış");
 			}
 		}
-		
+
 	}
 }

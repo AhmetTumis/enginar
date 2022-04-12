@@ -1,429 +1,303 @@
 #include "InputManager.h"
 
-
-/*
-
-
-
-
-
-*/
-/*const SDL_Keycode* Keyboard::createKeyMap()
+InputManager::InputManager()
 {
-	static SDL_Keycode k[Keyboard::KEY_MAX_ENUM] = {SDLK_UNKNOWN};
-
-	k[Keyboard::KEY_UNKNOWN] = SDLK_UNKNOWN;
-
-	k[Keyboard::KEY_RETURN] = SDLK_RETURN;
-	k[Keyboard::KEY_ESCAPE] = SDLK_ESCAPE;
-	k[Keyboard::KEY_BACKSPACE] = SDLK_BACKSPACE;
-	k[Keyboard::KEY_TAB] = SDLK_TAB;
-	k[Keyboard::KEY_SPACE] = SDLK_SPACE;
-	k[Keyboard::KEY_EXCLAIM] = SDLK_EXCLAIM;
-	k[Keyboard::KEY_QUOTEDBL] = SDLK_QUOTEDBL;
-	k[Keyboard::KEY_HASH] = SDLK_HASH;
-	k[Keyboard::KEY_PERCENT] = SDLK_PERCENT;
-	k[Keyboard::KEY_DOLLAR] = SDLK_DOLLAR;
-	k[Keyboard::KEY_AMPERSAND] = SDLK_AMPERSAND;
-	k[Keyboard::KEY_QUOTE] = SDLK_QUOTE;
-	k[Keyboard::KEY_LEFTPAREN] = SDLK_LEFTPAREN;
-	k[Keyboard::KEY_RIGHTPAREN] = SDLK_RIGHTPAREN;
-	k[Keyboard::KEY_ASTERISK] = SDLK_ASTERISK;
-	k[Keyboard::KEY_PLUS] = SDLK_PLUS;
-	k[Keyboard::KEY_COMMA] = SDLK_COMMA;
-	k[Keyboard::KEY_MINUS] = SDLK_MINUS;
-	k[Keyboard::KEY_PERIOD] = SDLK_PERIOD;
-	k[Keyboard::KEY_SLASH] = SDLK_SLASH;
-	k[Keyboard::KEY_0] = SDLK_0;
-	k[Keyboard::KEY_1] = SDLK_1;
-	k[Keyboard::KEY_2] = SDLK_2;
-	k[Keyboard::KEY_3] = SDLK_3;
-	k[Keyboard::KEY_4] = SDLK_4;
-	k[Keyboard::KEY_5] = SDLK_5;
-	k[Keyboard::KEY_6] = SDLK_6;
-	k[Keyboard::KEY_7] = SDLK_7;
-	k[Keyboard::KEY_8] = SDLK_8;
-	k[Keyboard::KEY_9] = SDLK_9;
-	k[Keyboard::KEY_COLON] = SDLK_COLON;
-	k[Keyboard::KEY_SEMICOLON] = SDLK_SEMICOLON;
-	k[Keyboard::KEY_LESS] = SDLK_LESS;
-	k[Keyboard::KEY_EQUALS] = SDLK_EQUALS;
-	k[Keyboard::KEY_GREATER] = SDLK_GREATER;
-	k[Keyboard::KEY_QUESTION] = SDLK_QUESTION;
-	k[Keyboard::KEY_AT] = SDLK_AT;
-
-	k[Keyboard::KEY_LEFTBRACKET] = SDLK_LEFTBRACKET;
-	k[Keyboard::KEY_BACKSLASH] = SDLK_BACKSLASH;
-	k[Keyboard::KEY_RIGHTBRACKET] = SDLK_RIGHTBRACKET;
-	k[Keyboard::KEY_CARET] = SDLK_CARET;
-	k[Keyboard::KEY_UNDERSCORE] = SDLK_UNDERSCORE;
-	k[Keyboard::KEY_BACKQUOTE] = SDLK_BACKQUOTE;
-	k[Keyboard::KEY_A] = SDLK_a;
-	k[Keyboard::KEY_B] = SDLK_b;
-	k[Keyboard::KEY_C] = SDLK_c;
-	k[Keyboard::KEY_D] = SDLK_d;
-	k[Keyboard::KEY_E] = SDLK_e;
-	k[Keyboard::KEY_F] = SDLK_f;
-	k[Keyboard::KEY_G] = SDLK_g;
-	k[Keyboard::KEY_H] = SDLK_h;
-	k[Keyboard::KEY_I] = SDLK_i;
-	k[Keyboard::KEY_J] = SDLK_j;
-	k[Keyboard::KEY_K] = SDLK_k;
-	k[Keyboard::KEY_L] = SDLK_l;
-	k[Keyboard::KEY_M] = SDLK_m;
-	k[Keyboard::KEY_N] = SDLK_n;
-	k[Keyboard::KEY_O] = SDLK_o;
-	k[Keyboard::KEY_P] = SDLK_p;
-	k[Keyboard::KEY_Q] = SDLK_q;
-	k[Keyboard::KEY_R] = SDLK_r;
-	k[Keyboard::KEY_S] = SDLK_s;
-	k[Keyboard::KEY_T] = SDLK_t;
-	k[Keyboard::KEY_U] = SDLK_u;
-	k[Keyboard::KEY_V] = SDLK_v;
-	k[Keyboard::KEY_W] = SDLK_w;
-	k[Keyboard::KEY_X] = SDLK_x;
-	k[Keyboard::KEY_Y] = SDLK_y;
-	k[Keyboard::KEY_Z] = SDLK_z;
-
-	k[Keyboard::KEY_CAPSLOCK] = SDLK_CAPSLOCK;
-
-	k[Keyboard::KEY_F1] = SDLK_F1;
-	k[Keyboard::KEY_F2] = SDLK_F2;
-	k[Keyboard::KEY_F3] = SDLK_F3;
-	k[Keyboard::KEY_F4] = SDLK_F4;
-	k[Keyboard::KEY_F5] = SDLK_F5;
-	k[Keyboard::KEY_F6] = SDLK_F6;
-	k[Keyboard::KEY_F7] = SDLK_F7;
-	k[Keyboard::KEY_F8] = SDLK_F8;
-	k[Keyboard::KEY_F9] = SDLK_F9;
-	k[Keyboard::KEY_F10] = SDLK_F10;
-	k[Keyboard::KEY_F11] = SDLK_F11;
-	k[Keyboard::KEY_F12] = SDLK_F12;
-
-	k[Keyboard::KEY_PRINTSCREEN] = SDLK_PRINTSCREEN;
-	k[Keyboard::KEY_SCROLLLOCK] = SDLK_SCROLLLOCK;
-	k[Keyboard::KEY_PAUSE] = SDLK_PAUSE;
-	k[Keyboard::KEY_INSERT] = SDLK_INSERT;
-	k[Keyboard::KEY_HOME] = SDLK_HOME;
-	k[Keyboard::KEY_PAGEUP] = SDLK_PAGEUP;
-	k[Keyboard::KEY_DELETE] = SDLK_DELETE;
-	k[Keyboard::KEY_END] = SDLK_END;
-	k[Keyboard::KEY_PAGEDOWN] = SDLK_PAGEDOWN;
-	k[Keyboard::KEY_RIGHT] = SDLK_RIGHT;
-	k[Keyboard::KEY_LEFT] = SDLK_LEFT;
-	k[Keyboard::KEY_DOWN] = SDLK_DOWN;
-	k[Keyboard::KEY_UP] = SDLK_UP;
-
-	k[Keyboard::KEY_NUMLOCKCLEAR] = SDLK_NUMLOCKCLEAR;
-	k[Keyboard::KEY_KP_DIVIDE] = SDLK_KP_DIVIDE;
-	k[Keyboard::KEY_KP_MULTIPLY] = SDLK_KP_MULTIPLY;
-	k[Keyboard::KEY_KP_MINUS] = SDLK_KP_MINUS;
-	k[Keyboard::KEY_KP_PLUS] = SDLK_KP_PLUS;
-	k[Keyboard::KEY_KP_ENTER] = SDLK_KP_ENTER;
-	k[Keyboard::KEY_KP_0] = SDLK_KP_0;
-	k[Keyboard::KEY_KP_1] = SDLK_KP_1;
-	k[Keyboard::KEY_KP_2] = SDLK_KP_2;
-	k[Keyboard::KEY_KP_3] = SDLK_KP_3;
-	k[Keyboard::KEY_KP_4] = SDLK_KP_4;
-	k[Keyboard::KEY_KP_5] = SDLK_KP_5;
-	k[Keyboard::KEY_KP_6] = SDLK_KP_6;
-	k[Keyboard::KEY_KP_7] = SDLK_KP_7;
-	k[Keyboard::KEY_KP_8] = SDLK_KP_8;
-	k[Keyboard::KEY_KP_9] = SDLK_KP_9;
-	k[Keyboard::KEY_KP_PERIOD] = SDLK_KP_PERIOD;
-	k[Keyboard::KEY_KP_COMMA] = SDLK_KP_COMMA;
-	k[Keyboard::KEY_KP_EQUALS] = SDLK_KP_EQUALS;
-
-	k[Keyboard::KEY_APPLICATION] = SDLK_APPLICATION;
-	k[Keyboard::KEY_POWER] = SDLK_POWER;
-	k[Keyboard::KEY_F13] = SDLK_F13;
-	k[Keyboard::KEY_F14] = SDLK_F14;
-	k[Keyboard::KEY_F15] = SDLK_F15;
-	k[Keyboard::KEY_F16] = SDLK_F16;
-	k[Keyboard::KEY_F17] = SDLK_F17;
-	k[Keyboard::KEY_F18] = SDLK_F18;
-	k[Keyboard::KEY_F19] = SDLK_F19;
-	k[Keyboard::KEY_F20] = SDLK_F20;
-	k[Keyboard::KEY_F21] = SDLK_F21;
-	k[Keyboard::KEY_F22] = SDLK_F22;
-	k[Keyboard::KEY_F23] = SDLK_F23;
-	k[Keyboard::KEY_F24] = SDLK_F24;
-	k[Keyboard::KEY_EXECUTE] = SDLK_EXECUTE;
-	k[Keyboard::KEY_HELP] = SDLK_HELP;
-	k[Keyboard::KEY_MENU] = SDLK_MENU;
-	k[Keyboard::KEY_SELECT] = SDLK_SELECT;
-	k[Keyboard::KEY_STOP] = SDLK_STOP;
-	k[Keyboard::KEY_AGAIN] = SDLK_AGAIN;
-	k[Keyboard::KEY_UNDO] = SDLK_UNDO;
-	k[Keyboard::KEY_CUT] = SDLK_CUT;
-	k[Keyboard::KEY_COPY] = SDLK_COPY;
-	k[Keyboard::KEY_PASTE] = SDLK_PASTE;
-	k[Keyboard::KEY_FIND] = SDLK_FIND;
-	k[Keyboard::KEY_MUTE] = SDLK_MUTE;
-	k[Keyboard::KEY_VOLUMEUP] = SDLK_VOLUMEUP;
-	k[Keyboard::KEY_VOLUMEDOWN] = SDLK_VOLUMEDOWN;
-
-	k[Keyboard::KEY_ALTERASE] = SDLK_ALTERASE;
-	k[Keyboard::KEY_SYSREQ] = SDLK_SYSREQ;
-	k[Keyboard::KEY_CANCEL] = SDLK_CANCEL;
-	k[Keyboard::KEY_CLEAR] = SDLK_CLEAR;
-	k[Keyboard::KEY_PRIOR] = SDLK_PRIOR;
-	k[Keyboard::KEY_RETURN2] = SDLK_RETURN2;
-	k[Keyboard::KEY_SEPARATOR] = SDLK_SEPARATOR;
-	k[Keyboard::KEY_OUT] = SDLK_OUT;
-	k[Keyboard::KEY_OPER] = SDLK_OPER;
-	k[Keyboard::KEY_CLEARAGAIN] = SDLK_CLEARAGAIN;
-
-	k[Keyboard::KEY_THOUSANDSSEPARATOR] = SDLK_THOUSANDSSEPARATOR;
-	k[Keyboard::KEY_DECIMALSEPARATOR] = SDLK_DECIMALSEPARATOR;
-	k[Keyboard::KEY_CURRENCYUNIT] = SDLK_CURRENCYUNIT;
-	k[Keyboard::KEY_CURRENCYSUBUNIT] = SDLK_CURRENCYSUBUNIT;
-
-	k[Keyboard::KEY_LCTRL] = SDLK_LCTRL;
-	k[Keyboard::KEY_LSHIFT] = SDLK_LSHIFT;
-	k[Keyboard::KEY_LALT] = SDLK_LALT;
-	k[Keyboard::KEY_LGUI] = SDLK_LGUI;
-	k[Keyboard::KEY_RCTRL] = SDLK_RCTRL;
-	k[Keyboard::KEY_RSHIFT] = SDLK_RSHIFT;
-	k[Keyboard::KEY_RALT] = SDLK_RALT;
-	k[Keyboard::KEY_RGUI] = SDLK_RGUI;
-
-	k[Keyboard::KEY_MODE] = SDLK_MODE;
-
-	k[Keyboard::KEY_AUDIONEXT] = SDLK_AUDIONEXT;
-	k[Keyboard::KEY_AUDIOPREV] = SDLK_AUDIOPREV;
-	k[Keyboard::KEY_AUDIOSTOP] = SDLK_AUDIOSTOP;
-	k[Keyboard::KEY_AUDIOPLAY] = SDLK_AUDIOPLAY;
-	k[Keyboard::KEY_AUDIOMUTE] = SDLK_AUDIOMUTE;
-	k[Keyboard::KEY_MEDIASELECT] = SDLK_MEDIASELECT;
-	k[Keyboard::KEY_WWW] = SDLK_WWW;
-	k[Keyboard::KEY_MAIL] = SDLK_MAIL;
-	k[Keyboard::KEY_CALCULATOR] = SDLK_CALCULATOR;
-	k[Keyboard::KEY_COMPUTER] = SDLK_COMPUTER;
-	k[Keyboard::KEY_APP_SEARCH] = SDLK_AC_SEARCH;
-	k[Keyboard::KEY_APP_HOME] = SDLK_AC_HOME;
-	k[Keyboard::KEY_APP_BACK] = SDLK_AC_BACK;
-	k[Keyboard::KEY_APP_FORWARD] = SDLK_AC_FORWARD;
-	k[Keyboard::KEY_APP_STOP] = SDLK_AC_STOP;
-	k[Keyboard::KEY_APP_REFRESH] = SDLK_AC_REFRESH;
-	k[Keyboard::KEY_APP_BOOKMARKS] = SDLK_AC_BOOKMARKS;
-
-	k[Keyboard::KEY_BRIGHTNESSDOWN] = SDLK_BRIGHTNESSDOWN;
-	k[Keyboard::KEY_BRIGHTNESSUP] = SDLK_BRIGHTNESSUP;
-	k[Keyboard::KEY_DISPLAYSWITCH] = SDLK_DISPLAYSWITCH;
-	k[Keyboard::KEY_KBDILLUMTOGGLE] = SDLK_KBDILLUMTOGGLE;
-	k[Keyboard::KEY_KBDILLUMDOWN] = SDLK_KBDILLUMDOWN;
-	k[Keyboard::KEY_KBDILLUMUP] = SDLK_KBDILLUMUP;
-	k[Keyboard::KEY_EJECT] = SDLK_EJECT;
-	k[Keyboard::KEY_SLEEP] = SDLK_SLEEP;
-
-	return k;
+	keyStates = SDL_GetKeyboardState(nullptr);
 }
 
-StringMap<Keyboard::Key, Keyboard::KEY_MAX_ENUM>::Entry Keyboard::keyEntries[] =
+void InputManager::updateState()
 {
-	{"unknown", Keyboard::KEY_UNKNOWN},
+	keyStates = SDL_GetKeyboardState(nullptr);
+}
 
-	{"return", Keyboard::KEY_RETURN},
-	{"escape", Keyboard::KEY_ESCAPE},
-	{"backspace", Keyboard::KEY_BACKSPACE},
-	{"tab", Keyboard::KEY_TAB},
-	{"space", Keyboard::KEY_SPACE},
-	{"!", Keyboard::KEY_EXCLAIM},
-	{"\"", Keyboard::KEY_QUOTEDBL},
-	{"#", Keyboard::KEY_HASH},
-	{"%", Keyboard::KEY_PERCENT},
-	{"$", Keyboard::KEY_DOLLAR},
-	{"&", Keyboard::KEY_AMPERSAND},
-	{"'", Keyboard::KEY_QUOTE},
-	{"(", Keyboard::KEY_LEFTPAREN},
-	{")", Keyboard::KEY_RIGHTPAREN},
-	{"*", Keyboard::KEY_ASTERISK},
-	{"+", Keyboard::KEY_PLUS},
-	{",", Keyboard::KEY_COMMA},
-	{"-", Keyboard::KEY_MINUS},
-	{".", Keyboard::KEY_PERIOD},
-	{"/", Keyboard::KEY_SLASH},
-	{"0", Keyboard::KEY_0},
-	{"1", Keyboard::KEY_1},
-	{"2", Keyboard::KEY_2},
-	{"3", Keyboard::KEY_3},
-	{"4", Keyboard::KEY_4},
-	{"5", Keyboard::KEY_5},
-	{"6", Keyboard::KEY_6},
-	{"7", Keyboard::KEY_7},
-	{"8", Keyboard::KEY_8},
-	{"9", Keyboard::KEY_9},
-	{":", Keyboard::KEY_COLON},
-	{";", Keyboard::KEY_SEMICOLON},
-	{"<", Keyboard::KEY_LESS},
-	{"=", Keyboard::KEY_EQUALS},
-	{">", Keyboard::KEY_GREATER},
-	{"?", Keyboard::KEY_QUESTION},
-	{"@", Keyboard::KEY_AT},
 
-	{"[", Keyboard::KEY_LEFTBRACKET},
-	{"\\", Keyboard::KEY_BACKSLASH},
-	{"]", Keyboard::KEY_RIGHTBRACKET},
-	{"^", Keyboard::KEY_CARET},
-	{"_", Keyboard::KEY_UNDERSCORE},
-	{"`", Keyboard::KEY_BACKQUOTE},
-	{"a", Keyboard::KEY_A},
-	{"b", Keyboard::KEY_B},
-	{"c", Keyboard::KEY_C},
-	{"d", Keyboard::KEY_D},
-	{"e", Keyboard::KEY_E},
-	{"f", Keyboard::KEY_F},
-	{"g", Keyboard::KEY_G},
-	{"h", Keyboard::KEY_H},
-	{"i", Keyboard::KEY_I},
-	{"j", Keyboard::KEY_J},
-	{"k", Keyboard::KEY_K},
-	{"l", Keyboard::KEY_L},
-	{"m", Keyboard::KEY_M},
-	{"n", Keyboard::KEY_N},
-	{"o", Keyboard::KEY_O},
-	{"p", Keyboard::KEY_P},
-	{"q", Keyboard::KEY_Q},
-	{"r", Keyboard::KEY_R},
-	{"s", Keyboard::KEY_S},
-	{"t", Keyboard::KEY_T},
-	{"u", Keyboard::KEY_U},
-	{"v", Keyboard::KEY_V},
-	{"w", Keyboard::KEY_W},
-	{"x", Keyboard::KEY_X},
-	{"y", Keyboard::KEY_Y},
-	{"z", Keyboard::KEY_Z},
+void InputManager::ListenEvent(SDL_Event event)
+{
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
+		{
+			case SDL_KEYDOWN: case SDL_KEYUP:
+				updateState();
+				break;
+		}
+	}
+}
 
-	{"capslock", Keyboard::KEY_CAPSLOCK},
+bool InputManager::isDown(SDL_Scancode key)
+{
+	return keyStates[key];
+}
 
-	{"f1", Keyboard::KEY_F1},
-	{"f2", Keyboard::KEY_F2},
-	{"f3", Keyboard::KEY_F3},
-	{"f4", Keyboard::KEY_F4},
-	{"f5", Keyboard::KEY_F5},
-	{"f6", Keyboard::KEY_F6},
-	{"f7", Keyboard::KEY_F7},
-	{"f8", Keyboard::KEY_F8},
-	{"f9", Keyboard::KEY_F9},
-	{"f10", Keyboard::KEY_F10},
-	{"f11", Keyboard::KEY_F11},
-	{"f12", Keyboard::KEY_F12},
+bool InputManager::isDown(string key)
+{
+	SDL_Scancode scanCode = keyMap[key];
+	return isDown(scanCode);
+}
 
-	{"printscreen", Keyboard::KEY_PRINTSCREEN},
-	{"scrolllock", Keyboard::KEY_SCROLLLOCK},
-	{"pause", Keyboard::KEY_PAUSE},
-	{"insert", Keyboard::KEY_INSERT},
-	{"home", Keyboard::KEY_HOME},
-	{"pageup", Keyboard::KEY_PAGEUP},
-	{"delete", Keyboard::KEY_DELETE},
-	{"end", Keyboard::KEY_END},
-	{"pagedown", Keyboard::KEY_PAGEDOWN},
-	{"right", Keyboard::KEY_RIGHT},
-	{"left", Keyboard::KEY_LEFT},
-	{"down", Keyboard::KEY_DOWN},
-	{"up", Keyboard::KEY_UP},
+bool InputManager::isDown(SDL_Keycode key)
+{
+	SDL_Scancode scanCode = SDL_GetScancodeFromKey(key);
+	return isDown(scanCode);
+}
 
-	{"numlock", Keyboard::KEY_NUMLOCKCLEAR},
-	{"kp/", Keyboard::KEY_KP_DIVIDE},
-	{"kp*", Keyboard::KEY_KP_MULTIPLY},
-	{"kp-", Keyboard::KEY_KP_MINUS},
-	{"kp+", Keyboard::KEY_KP_PLUS},
-	{"kpenter", Keyboard::KEY_KP_ENTER},
-	{"kp0", Keyboard::KEY_KP_0},
-	{"kp1", Keyboard::KEY_KP_1},
-	{"kp2", Keyboard::KEY_KP_2},
-	{"kp3", Keyboard::KEY_KP_3},
-	{"kp4", Keyboard::KEY_KP_4},
-	{"kp5", Keyboard::KEY_KP_5},
-	{"kp6", Keyboard::KEY_KP_6},
-	{"kp7", Keyboard::KEY_KP_7},
-	{"kp8", Keyboard::KEY_KP_8},
-	{"kp9", Keyboard::KEY_KP_9},
-	{"kp.", Keyboard::KEY_KP_PERIOD},
-	{"kp,", Keyboard::KEY_KP_COMMA},
-	{"kp=", Keyboard::KEY_KP_EQUALS},
+unordered_map<string, SDL_Scancode> InputManager::keyMap = {
+	{"unknown", SDL_SCANCODE_UNKNOWN},
 
-	{"application", Keyboard::KEY_APPLICATION},
-	{"power", Keyboard::KEY_POWER},
-	{"f13", Keyboard::KEY_F13},
-	{"f14", Keyboard::KEY_F14},
-	{"f15", Keyboard::KEY_F15},
-	{"f16", Keyboard::KEY_F16},
-	{"f17", Keyboard::KEY_F17},
-	{"f18", Keyboard::KEY_F18},
-	{"f19", Keyboard::KEY_F19},
-	{"f20", Keyboard::KEY_F20},
-	{"f21", Keyboard::KEY_F21},
-	{"f22", Keyboard::KEY_F22},
-	{"f23", Keyboard::KEY_F23},
-	{"f24", Keyboard::KEY_F24},
-	{"execute", Keyboard::KEY_EXECUTE},
-	{"help", Keyboard::KEY_HELP},
-	{"menu", Keyboard::KEY_MENU},
-	{"select", Keyboard::KEY_SELECT},
-	{"stop", Keyboard::KEY_STOP},
-	{"again", Keyboard::KEY_AGAIN},
-	{"undo", Keyboard::KEY_UNDO},
-	{"cut", Keyboard::KEY_CUT},
-	{"copy", Keyboard::KEY_COPY},
-	{"paste", Keyboard::KEY_PASTE},
-	{"find", Keyboard::KEY_FIND},
-	{"mute", Keyboard::KEY_MUTE},
-	{"volumeup", Keyboard::KEY_VOLUMEUP},
-	{"volumedown", Keyboard::KEY_VOLUMEDOWN},
+	{"a", SDL_SCANCODE_A},
+	{"b", SDL_SCANCODE_B},
+	{"c", SDL_SCANCODE_C},
+	{"d", SDL_SCANCODE_D},
+	{"e", SDL_SCANCODE_E},
+	{"f", SDL_SCANCODE_F},
+	{"g", SDL_SCANCODE_G},
+	{"h", SDL_SCANCODE_H},
+	{"i", SDL_SCANCODE_I},
+	{"j", SDL_SCANCODE_J},
+	{"k", SDL_SCANCODE_K},
+	{"l", SDL_SCANCODE_L},
+	{"m", SDL_SCANCODE_M},
+	{"n", SDL_SCANCODE_N},
+	{"o", SDL_SCANCODE_O},
+	{"p", SDL_SCANCODE_P},
+	{"q", SDL_SCANCODE_Q},
+	{"r", SDL_SCANCODE_R},
+	{"s", SDL_SCANCODE_S},
+	{"t", SDL_SCANCODE_T},
+	{"u", SDL_SCANCODE_U},
+	{"v", SDL_SCANCODE_V},
+	{"w", SDL_SCANCODE_W},
+	{"x", SDL_SCANCODE_X},
+	{"y", SDL_SCANCODE_Y},
+	{"z", SDL_SCANCODE_Z},
 
-	{"alterase", Keyboard::KEY_ALTERASE},
-	{"sysreq", Keyboard::KEY_SYSREQ},
-	{"cancel", Keyboard::KEY_CANCEL},
-	{"clear", Keyboard::KEY_CLEAR},
-	{"prior", Keyboard::KEY_PRIOR},
-	{"return2", Keyboard::KEY_RETURN2},
-	{"separator", Keyboard::KEY_SEPARATOR},
-	{"out", Keyboard::KEY_OUT},
-	{"oper", Keyboard::KEY_OPER},
-	{"clearagain", Keyboard::KEY_CLEARAGAIN},
+	{"1", SDL_SCANCODE_1},
+	{"2", SDL_SCANCODE_2},
+	{"3", SDL_SCANCODE_3},
+	{"4", SDL_SCANCODE_4},
+	{"5", SDL_SCANCODE_5},
+	{"6", SDL_SCANCODE_6},
+	{"7", SDL_SCANCODE_7},
+	{"8", SDL_SCANCODE_8},
+	{"9", SDL_SCANCODE_9},
+	{"0", SDL_SCANCODE_0},
 
-	{"thsousandsseparator", Keyboard::KEY_THOUSANDSSEPARATOR},
-	{"decimalseparator", Keyboard::KEY_DECIMALSEPARATOR},
-	{"currencyunit", Keyboard::KEY_CURRENCYUNIT},
-	{"currencysubunit", Keyboard::KEY_CURRENCYSUBUNIT},
+	{"return", SDL_SCANCODE_RETURN},
+	{"escape", SDL_SCANCODE_ESCAPE},
+	{"backspace", SDL_SCANCODE_BACKSPACE},
+	{"tab", SDL_SCANCODE_TAB},
+	{"space", SDL_SCANCODE_SPACE},
 
-	{"lctrl", Keyboard::KEY_LCTRL},
-	{"lshift", Keyboard::KEY_LSHIFT},
-	{"lalt", Keyboard::KEY_LALT},
-	{"lgui", Keyboard::KEY_LGUI},
-	{"rctrl", Keyboard::KEY_RCTRL},
-	{"rshift", Keyboard::KEY_RSHIFT},
-	{"ralt", Keyboard::KEY_RALT},
-	{"rgui", Keyboard::KEY_RGUI},
+	{"-", SDL_SCANCODE_MINUS},
+	{"=", SDL_SCANCODE_EQUALS},
+	{"[", SDL_SCANCODE_LEFTBRACKET},
+	{"]", SDL_SCANCODE_RIGHTBRACKET},
+	{"\\", SDL_SCANCODE_BACKSLASH},
+	{"nonus#", SDL_SCANCODE_NONUSHASH},
+	{";", SDL_SCANCODE_SEMICOLON},
+	{"'", SDL_SCANCODE_APOSTROPHE},
+	{"`", SDL_SCANCODE_GRAVE},
+	{",", SDL_SCANCODE_COMMA},
+	{".", SDL_SCANCODE_PERIOD},
+	{"/", SDL_SCANCODE_SLASH},
 
-	{"mode", Keyboard::KEY_MODE},
+	{"capslock", SDL_SCANCODE_CAPSLOCK},
 
-	{"audionext", Keyboard::KEY_AUDIONEXT},
-	{"audioprev", Keyboard::KEY_AUDIOPREV},
-	{"audiostop", Keyboard::KEY_AUDIOSTOP},
-	{"audioplay", Keyboard::KEY_AUDIOPLAY},
-	{"audiomute", Keyboard::KEY_AUDIOMUTE},
-	{"mediaselect", Keyboard::KEY_MEDIASELECT},
-	{"www", Keyboard::KEY_WWW},
-	{"mail", Keyboard::KEY_MAIL},
-	{"calculator", Keyboard::KEY_CALCULATOR},
-	{"computer", Keyboard::KEY_COMPUTER},
-	{"appsearch", Keyboard::KEY_APP_SEARCH},
-	{"apphome", Keyboard::KEY_APP_HOME},
-	{"appback", Keyboard::KEY_APP_BACK},
-	{"appforward", Keyboard::KEY_APP_FORWARD},
-	{"appstop", Keyboard::KEY_APP_STOP},
-	{"apprefresh", Keyboard::KEY_APP_REFRESH},
-	{"appbookmarks", Keyboard::KEY_APP_BOOKMARKS},
+	{"f1", SDL_SCANCODE_F1},
+	{"f2", SDL_SCANCODE_F2},
+	{"f3", SDL_SCANCODE_F3},
+	{"f4", SDL_SCANCODE_F4},
+	{"f5", SDL_SCANCODE_F5},
+	{"f6", SDL_SCANCODE_F6},
+	{"f7", SDL_SCANCODE_F7},
+	{"f8", SDL_SCANCODE_F8},
+	{"f9", SDL_SCANCODE_F9},
+	{"f10", SDL_SCANCODE_F10},
+	{"f11", SDL_SCANCODE_F11},
+	{"f12", SDL_SCANCODE_F12},
 
-	{"brightnessdown", Keyboard::KEY_BRIGHTNESSDOWN},
-	{"brightnessup", Keyboard::KEY_BRIGHTNESSUP},
-	{"displayswitch", Keyboard::KEY_DISPLAYSWITCH},
-	{"kbdillumtoggle", Keyboard::KEY_KBDILLUMTOGGLE},
-	{"kbdillumdown", Keyboard::KEY_KBDILLUMDOWN},
-	{"kbdillumup", Keyboard::KEY_KBDILLUMUP},
-	{"eject", Keyboard::KEY_EJECT},
-	{"sleep", Keyboard::KEY_SLEEP},
-};*/
+	{"printscreen", SDL_SCANCODE_PRINTSCREEN},
+	{"scrolllock", SDL_SCANCODE_SCROLLLOCK},
+	{"pause", SDL_SCANCODE_PAUSE},
+	{"insert", SDL_SCANCODE_INSERT},
+	{"home", SDL_SCANCODE_HOME},
+	{"pageup", SDL_SCANCODE_PAGEUP},
+	{"delete", SDL_SCANCODE_DELETE},
+	{"end", SDL_SCANCODE_END},
+	{"pagedown", SDL_SCANCODE_PAGEDOWN},
+	{"right", SDL_SCANCODE_RIGHT},
+	{"left", SDL_SCANCODE_LEFT},
+	{"down", SDL_SCANCODE_DOWN},
+	{"up", SDL_SCANCODE_UP},
+
+	{"numlock", SDL_SCANCODE_NUMLOCKCLEAR},
+	{"kp/", SDL_SCANCODE_KP_DIVIDE},
+	{"kp*", SDL_SCANCODE_KP_MULTIPLY},
+	{"kp-", SDL_SCANCODE_KP_MINUS},
+	{"kp+", SDL_SCANCODE_KP_PLUS},
+	{"kpenter", SDL_SCANCODE_KP_ENTER},
+	{"kp1", SDL_SCANCODE_KP_1},
+	{"kp2", SDL_SCANCODE_KP_2},
+	{"kp3", SDL_SCANCODE_KP_3},
+	{"kp4", SDL_SCANCODE_KP_4},
+	{"kp5", SDL_SCANCODE_KP_5},
+	{"kp6", SDL_SCANCODE_KP_6},
+	{"kp7", SDL_SCANCODE_KP_7},
+	{"kp8", SDL_SCANCODE_KP_8},
+	{"kp9", SDL_SCANCODE_KP_9},
+	{"kp0", SDL_SCANCODE_KP_0},
+	{"kp.", SDL_SCANCODE_KP_PERIOD},
+
+	{"nonusbackslash", SDL_SCANCODE_NONUSBACKSLASH},
+	{"application", SDL_SCANCODE_APPLICATION},
+	{"power", SDL_SCANCODE_POWER},
+	{"kp=", SDL_SCANCODE_KP_EQUALS},
+	{"f13", SDL_SCANCODE_F13},
+	{"f14", SDL_SCANCODE_F14},
+	{"f15", SDL_SCANCODE_F15},
+	{"f16", SDL_SCANCODE_F16},
+	{"f17", SDL_SCANCODE_F17},
+	{"f18", SDL_SCANCODE_F18},
+	{"f19", SDL_SCANCODE_F19},
+	{"f20", SDL_SCANCODE_F20},
+	{"f21", SDL_SCANCODE_F21},
+	{"f22", SDL_SCANCODE_F22},
+	{"f23", SDL_SCANCODE_F23},
+	{"f24", SDL_SCANCODE_F24},
+	{"execute", SDL_SCANCODE_EXECUTE},
+	{"help", SDL_SCANCODE_HELP},
+	{"menu", SDL_SCANCODE_MENU},
+	{"select", SDL_SCANCODE_SELECT},
+	{"stop", SDL_SCANCODE_STOP},
+	{"again", SDL_SCANCODE_AGAIN},
+	{"undo", SDL_SCANCODE_UNDO},
+	{"cut", SDL_SCANCODE_CUT},
+	{"copy", SDL_SCANCODE_COPY},
+	{"paste", SDL_SCANCODE_PASTE},
+	{"find", SDL_SCANCODE_FIND},
+	{"mute", SDL_SCANCODE_MUTE},
+	{"volumeup", SDL_SCANCODE_VOLUMEUP},
+	{"volumedown", SDL_SCANCODE_VOLUMEDOWN},
+	{"kp,", SDL_SCANCODE_KP_COMMA},
+	{"kp=400", SDL_SCANCODE_KP_EQUALSAS400},
+
+	{"international1", SDL_SCANCODE_INTERNATIONAL1},
+	{"international2", SDL_SCANCODE_INTERNATIONAL2},
+	{"international3", SDL_SCANCODE_INTERNATIONAL3},
+	{"international4", SDL_SCANCODE_INTERNATIONAL4},
+	{"international5", SDL_SCANCODE_INTERNATIONAL5},
+	{"international6", SDL_SCANCODE_INTERNATIONAL6},
+	{"international7", SDL_SCANCODE_INTERNATIONAL7},
+	{"international8", SDL_SCANCODE_INTERNATIONAL8},
+	{"international9", SDL_SCANCODE_INTERNATIONAL9},
+	{"lang1", SDL_SCANCODE_LANG1},
+	{"lang2", SDL_SCANCODE_LANG2},
+	{"lang3", SDL_SCANCODE_LANG3},
+	{"lang4", SDL_SCANCODE_LANG4},
+	{"lang5", SDL_SCANCODE_LANG5},
+	{"lang6", SDL_SCANCODE_LANG6},
+	{"lang7", SDL_SCANCODE_LANG7},
+	{"lang8", SDL_SCANCODE_LANG8},
+	{"lang9", SDL_SCANCODE_LANG9},
+
+	{"alterase", SDL_SCANCODE_ALTERASE},
+	{"sysreq", SDL_SCANCODE_SYSREQ},
+	{"cancel", SDL_SCANCODE_CANCEL},
+	{"clear", SDL_SCANCODE_CLEAR},
+	{"prior", SDL_SCANCODE_PRIOR},
+	{"return2", SDL_SCANCODE_RETURN2},
+	{"separator", SDL_SCANCODE_SEPARATOR},
+	{"out", SDL_SCANCODE_OUT},
+	{"oper", SDL_SCANCODE_OPER},
+	{"clearagain", SDL_SCANCODE_CLEARAGAIN},
+	{"crsel", SDL_SCANCODE_CRSEL},
+	{"exsel", SDL_SCANCODE_EXSEL},
+
+	{"kp00", SDL_SCANCODE_KP_00},
+	{"kp000", SDL_SCANCODE_KP_000},
+	{"thsousandsseparator", SDL_SCANCODE_THOUSANDSSEPARATOR},
+	{"decimalseparator", SDL_SCANCODE_DECIMALSEPARATOR},
+	{"currencyunit", SDL_SCANCODE_CURRENCYUNIT},
+	{"currencysubunit", SDL_SCANCODE_CURRENCYSUBUNIT},
+	{"kp(", SDL_SCANCODE_KP_LEFTPAREN},
+	{"kp)", SDL_SCANCODE_KP_RIGHTPAREN},
+	{"kp{", SDL_SCANCODE_KP_LEFTBRACE},
+	{"kp}", SDL_SCANCODE_KP_RIGHTBRACE},
+	{"kptab", SDL_SCANCODE_KP_TAB},
+	{"kpbackspace", SDL_SCANCODE_KP_BACKSPACE},
+	{"kpa", SDL_SCANCODE_KP_A},
+	{"kpb", SDL_SCANCODE_KP_B},
+	{"kpc", SDL_SCANCODE_KP_C},
+	{"kpd", SDL_SCANCODE_KP_D},
+	{"kpe", SDL_SCANCODE_KP_E},
+	{"kpf", SDL_SCANCODE_KP_F},
+	{"kpxor", SDL_SCANCODE_KP_XOR},
+	{"kpower", SDL_SCANCODE_KP_POWER},
+	{"kp%", SDL_SCANCODE_KP_PERCENT},
+	{"kp<", SDL_SCANCODE_KP_LESS},
+	{"kp>", SDL_SCANCODE_KP_GREATER},
+	{"kp&", SDL_SCANCODE_KP_AMPERSAND},
+	{"kp&&", SDL_SCANCODE_KP_DBLAMPERSAND},
+	{"kp|", SDL_SCANCODE_KP_VERTICALBAR},
+	{"kp||", SDL_SCANCODE_KP_DBLVERTICALBAR},
+	{"kp:", SDL_SCANCODE_KP_COLON},
+	{"kp#", SDL_SCANCODE_KP_HASH},
+	{"kp ", SDL_SCANCODE_KP_SPACE},
+	{"kp@", SDL_SCANCODE_KP_AT},
+	{"kp!", SDL_SCANCODE_KP_EXCLAM},
+	{"kpmemstore", SDL_SCANCODE_KP_MEMSTORE},
+	{"kpmemrecall", SDL_SCANCODE_KP_MEMRECALL},
+	{"kpmemclear", SDL_SCANCODE_KP_MEMCLEAR},
+	{"kpmem+", SDL_SCANCODE_KP_MEMADD},
+	{"kpmem-", SDL_SCANCODE_KP_MEMSUBTRACT},
+	{"kpmem*", SDL_SCANCODE_KP_MEMMULTIPLY},
+	{"kpmem/", SDL_SCANCODE_KP_MEMDIVIDE},
+	{"kp+-", SDL_SCANCODE_KP_PLUSMINUS},
+	{"kpclear", SDL_SCANCODE_KP_CLEAR},
+	{"kpclearentry", SDL_SCANCODE_KP_CLEARENTRY},
+	{"kpbinary", SDL_SCANCODE_KP_BINARY},
+	{"kpoctal", SDL_SCANCODE_KP_OCTAL},
+	{"kpdecimal", SDL_SCANCODE_KP_DECIMAL},
+	{"kphex", SDL_SCANCODE_KP_HEXADECIMAL},
+
+	{"lctrl", SDL_SCANCODE_LCTRL},
+	{"lshift", SDL_SCANCODE_LSHIFT},
+	{"lalt", SDL_SCANCODE_LALT},
+	{"lgui", SDL_SCANCODE_LGUI},
+	{"rctrl", SDL_SCANCODE_RCTRL},
+	{"rshift", SDL_SCANCODE_RSHIFT},
+	{"ralt", SDL_SCANCODE_RALT},
+	{"rgui", SDL_SCANCODE_RGUI},
+
+	{"mode", SDL_SCANCODE_MODE},
+
+	{"audionext", SDL_SCANCODE_AUDIONEXT},
+	{"audioprev", SDL_SCANCODE_AUDIOPREV},
+	{"audiostop", SDL_SCANCODE_AUDIOSTOP},
+	{"audioplay", SDL_SCANCODE_AUDIOPLAY},
+	{"audiomute", SDL_SCANCODE_AUDIOMUTE},
+	{"mediaselect", SDL_SCANCODE_MEDIASELECT},
+	{"www", SDL_SCANCODE_WWW},
+	{"mail", SDL_SCANCODE_MAIL},
+	{"calculator", SDL_SCANCODE_CALCULATOR},
+	{"computer", SDL_SCANCODE_COMPUTER},
+	{"acsearch", SDL_SCANCODE_AC_SEARCH},
+	{"achome", SDL_SCANCODE_AC_HOME},
+	{"acback", SDL_SCANCODE_AC_BACK},
+	{"acforward", SDL_SCANCODE_AC_FORWARD},
+	{"acstop", SDL_SCANCODE_AC_STOP},
+	{"acrefresh", SDL_SCANCODE_AC_REFRESH},
+	{"acbookmarks", SDL_SCANCODE_AC_BOOKMARKS},
+
+	{"brightnessdown", SDL_SCANCODE_BRIGHTNESSDOWN},
+	{"brightnessup", SDL_SCANCODE_BRIGHTNESSUP},
+	{"displayswitch", SDL_SCANCODE_DISPLAYSWITCH},
+	{"kbdillumtoggle", SDL_SCANCODE_KBDILLUMTOGGLE},
+	{"kbdillumdown", SDL_SCANCODE_KBDILLUMDOWN},
+	{"kbdillumup", SDL_SCANCODE_KBDILLUMUP},
+	{"eject", SDL_SCANCODE_EJECT},
+	{"sleep", SDL_SCANCODE_SLEEP},
+
+	{"app1", SDL_SCANCODE_APP1},
+	{"app2", SDL_SCANCODE_APP2}
+};
