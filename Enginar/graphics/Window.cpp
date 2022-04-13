@@ -2,6 +2,7 @@
 #include "../common/Constants.h"
 #include "../common/Game.h"
 #include "TextureManager.h"
+#include "../sound/Sound.h"
 
 Window::Window()
 {
@@ -11,10 +12,12 @@ Window::~Window()
 {
 }
 
+
 void Window::initializeWindow(const char* title, int x, int y, bool isFullScreen)
 {
 	//Init k�sm�
 	SDL_Init(SDL_INIT_EVERYTHING);
+	//SDL_Init(SDL_INIT_AUDIO);
 	window = SDL_CreateWindow("Enginar", x, y, 1600, 900, SDL_WINDOW_SHOWN);
 	
 	renderer = SDL_CreateRenderer(window, -1, 0);

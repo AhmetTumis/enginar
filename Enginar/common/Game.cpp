@@ -6,6 +6,7 @@
 #include "../physics/Collision.h"
 #include "../common/Vector.h"
 #include "../physics/RigidBody.h"
+#include "../sound/Sound.h"
 
 Game::Game()
 {
@@ -17,14 +18,25 @@ Game::~Game()
 GameObject* go = nullptr;
 GameObject* go2 = nullptr;
 InputManager inputManager;
+
+Sound* Asound;
+
+
+
 void Game::initializeGame(Window* _window)
 {
 	//Window'u e�itle
 	window = _window;
+	
+	Asound = new Sound("./assets/sounds/collide.wav");
+	Asound->SetupDevice();
+	
 
 #pragma region TEST_GAME
 	go = new GameObject();
 	go->init();
+
+
 
 	Sprite* playerAdventurer = new Sprite();
 
@@ -34,6 +46,8 @@ void Game::initializeGame(Window* _window)
 		"assets/adventurer-idle-2-02.png",
 		"assets/adventurer-idle-2-03.png",
 	};
+
+	
 
 	Layer* layerIDLE = playerAdventurer->createLayer("IDLE", idleSprites);
 
@@ -81,14 +95,14 @@ SDL_Event event;
 
 //Gameloop
 void Game::loop()
-{
+{	
+
 	int i = 0;
 	Uint32 a = 0, b = 0;
 	while (true)
 	{
 		a = SDL_GetTicks();
 		Uint32 deltaTime = a - b;
-
 		if (deltaTime >= 1000/60.0)
 		{
 			b = a;
@@ -96,15 +110,19 @@ void Game::loop()
 
 #pragma region Input
 			if (inputManager.isDown(SDLK_RIGHT) || inputManager.isDown("d"))
-			{
+			{	
+				//Asound->PlaySound();
 				go->getTransform()->setPositionX(go->getTransform()->getPositionX() + 1);
 			}
 			if (inputManager.isDown(SDLK_LEFT) || inputManager.isDown("a"))
 			{
+				//Asound->PlaySound();
 				go->getTransform()->setPositionX(go->getTransform()->getPositionX() - 1);
 			}
 			if (inputManager.isDown(SDLK_UP) || inputManager.isDown("w"))
 			{
+				//Asound->PlaySound();
+
 				/*auto pos = *go->getTransform()->getPosition();
 				auto dir = *go->getTransform()->getForward();
 				go->getTransform()->setPosition(pos + dir);*/
@@ -113,6 +131,8 @@ void Game::loop()
 			}
 			if (inputManager.isDown(SDLK_DOWN) || inputManager.isDown("s"))
 			{
+				//Asound->PlaySound();
+
 				go->getTransform()->setPositionY(go->getTransform()->getPositionY() + 1);
 			}
 			if (inputManager.isDown(SDLK_KP_PLUS))
