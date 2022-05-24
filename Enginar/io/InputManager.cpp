@@ -2,7 +2,8 @@
 
 InputManager::InputManager()
 {
-	keyStates = SDL_GetKeyboardState(nullptr);
+	updateState();
+	updateIsPressedState();
 }
 
 void InputManager::updateState()
@@ -10,6 +11,10 @@ void InputManager::updateState()
 	keyStates = SDL_GetKeyboardState(nullptr);
 }
 
+void InputManager::updateIsPressedState()
+{
+	keyPressedStates = const_cast<Uint8*>(SDL_GetKeyboardState(nullptr));
+}
 
 void InputManager::ListenEvent(SDL_Event event)
 {
@@ -17,8 +22,13 @@ void InputManager::ListenEvent(SDL_Event event)
 	{
 		switch (event.type)
 		{
-			case SDL_KEYDOWN: case SDL_KEYUP:
+			case SDL_KEYDOWN: 
+			case SDL_KEYUP:
 				updateState();
+				if (event.key.repeat == false)
+				{
+					updateIsPressedState();
+				}
 				break;
 		}
 	}
@@ -26,7 +36,12 @@ void InputManager::ListenEvent(SDL_Event event)
 
 bool InputManager::isDown(SDL_Scancode key)
 {
-	return keyStates[key];
+	if (keyPressedStates[key] == 1)
+	{
+		keyPressedStates[key] = 0;
+		return true;
+	}
+	return false;
 }
 
 bool InputManager::isDown(string key)

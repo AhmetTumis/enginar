@@ -18,7 +18,7 @@ void Window::initializeWindow(const char* title, int x, int y, bool isFullScreen
 	//Init k�sm�
 	SDL_Init(SDL_INIT_EVERYTHING);
 	//SDL_Init(SDL_INIT_AUDIO);
-	window = SDL_CreateWindow("Enginar", x, y, 1600, 900, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Enginar", x, y, 500, 900, SDL_WINDOW_SHOWN);
 	
 	renderer = SDL_CreateRenderer(window, -1, 0);
 
@@ -57,6 +57,14 @@ void Window::render()
 
 	//Renderer'� ekranda g�ster
 	SDL_RenderPresent(renderer);
+}
+
+vector2 Window::getWindowSize()
+{
+	int w, h;
+	SDL_GetWindowSize(window, &w, &h);
+
+	return vector2(w, h);
 }
 
 

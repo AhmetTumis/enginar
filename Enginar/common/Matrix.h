@@ -97,14 +97,16 @@ public:
 	}
 	T& operator - (Matrix b) 
 	{
+		auto ret = new Matrix<T>(b.m, b.n);
+
 		for (int i = 0; i < m; i++)
 		{
 			for (int j = 0; j < n; j++)
 			{
-				data[i][j] -= b.data[i][j];
+				ret->data[i][j] = data[i][j] - b.data[i][j];
 			}
 		}
-		return static_cast<T&>(*this);
+		return static_cast<T&>(*ret);
 	}
 	T& operator * (Matrix b)
 	{
@@ -145,6 +147,18 @@ public:
 			}
 		}
 	}
+
+	void copyFrom(Matrix b)
+	{
+		for (int i = 0; i < m; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				data[i][j] = b.data[i][j];
+			}
+		}
+	}
+
 	bool operator == (Matrix b)
 	{
 		for (int i = 0; i < m; i++)
@@ -159,4 +173,10 @@ public:
 			return true;
 		}
 	}
+};
+
+class Matrix3x3 : public Matrix<Matrix3x3>
+{
+public:
+	Matrix3x3() :Matrix<Matrix3x3>(3, 3) {}
 };

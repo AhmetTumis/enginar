@@ -24,16 +24,29 @@ class BoxCollider : public Collider
 public:
 	SDL_Rect colliderRect;
 
-	BoxCollider(const char* _tag, int x, int y, int width, int height) : Collider(_tag = _tag)
+	float widthMultipler;
+	float heightMultipler;
+
+	/// <summary>
+	/// Creates the collider
+	/// </summary>
+	/// <param name="_tag"></param>
+	/// <param name="x">Origin X</param>
+	/// <param name="y">Origin Y</param>
+	/// <param name="width">How many times bigger/smaller from the original Width? (Default=1. Equals to original width)</param>
+	/// <param name="height">How many times bigger/smaller from the original Height? (Default=1. Equals to original height)</param>
+	BoxCollider(const char* _tag, int x, int y, float _widthMultipler, float _heightMultipler, Texture* texture) : Collider(_tag = _tag), widthMultipler(_widthMultipler), heightMultipler(_heightMultipler)
 	{
 		colliderRect.x = x;
 		colliderRect.y = y;
-		colliderRect.w = width;
-		colliderRect.h = height;
+		colliderRect.w = texture->physicsRect.w * _widthMultipler;
+		colliderRect.h = texture->physicsRect.h * _heightMultipler;
 	}
 
 	BoxCollider(const char* _tag, SDL_Rect& rect) : Collider(_tag = _tag)
 	{
+		widthMultipler = 1;
+		heightMultipler = 1;
 		colliderRect = rect;
 	}
 
@@ -53,7 +66,7 @@ public:
 		radius = _radius;
 	}
 
-	virtual ColliderType GetType() { return ColliderType::BOX; }
+	virtual ColliderType GetType() { return ColliderType::CIRCLE; }
 
 	virtual void updateShape(Texture* texture);
 };

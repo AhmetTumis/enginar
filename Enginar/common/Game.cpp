@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "../graphics/Texture.h"
 #include "GameObject.h"
-#include "../io/InputManager.h"
 #include "../graphics/Sprite.h"
 #include "../physics/Collision.h"
 #include "../common/Vector.h"
@@ -17,22 +16,26 @@ Game::~Game()
 }
 GameObject* go = nullptr;
 GameObject* go2 = nullptr;
-InputManager inputManager;
 
-Sound* Asound;
+//Sound* Asound;
 
 
 
 void Game::initializeGame(Window* _window)
 {
+	printf("sa\n");
+
 	//Window'u e�itle
 	window = _window;
-	
-	Asound = new Sound("./assets/sounds/collide.wav");
-	Asound->SetupDevice();
-	
 
-#pragma region TEST_GAME
+	inputManager = new InputManager();
+	physicsMotor = new PhysicsMotor();
+	
+	//Asound = new Sound("./assets/sounds/collide.wav");
+	//Asound->SetupDevice();
+	
+	
+/*#pragma region TEST_GAME
 	go = new GameObject();
 	go->init();
 
@@ -42,9 +45,9 @@ void Game::initializeGame(Window* _window)
 
 	vector<const char*> idleSprites = {
 		"assets/adventurer-idle-2-00.png",
-		"assets/adventurer-idle-2-01.png",
-		"assets/adventurer-idle-2-02.png",
-		"assets/adventurer-idle-2-03.png",
+		"assets/adventurer-idle-2-01.png"
+		//"assets/adventurer-idle-2-02.png",
+		//"assets/adventurer-idle-2-03.png",
 	};
 
 	
@@ -77,7 +80,7 @@ void Game::initializeGame(Window* _window)
 	go2->addComponent(make_any<Texture*>(tex));
 
 	go2->getTransform()->setScale(300);
-	go2->getTransform()->setPositionX(300);
+	go2->getTransform()->setPositionX(500);
 
 	auto rect2 = (any_cast<Transform*>(go2->getComponent(typeid(Transform*))))->rect1;
 
@@ -86,9 +89,8 @@ void Game::initializeGame(Window* _window)
 	go2->addComponent(make_any<Collider*>(dynamic_cast<Collider*>(col2)));
 
 	gameObjects.push_back(go2);
-#pragma endregion
-
-	loop();
+#pragma endregion*/
+	
 }
 
 SDL_Event event;
@@ -103,77 +105,77 @@ void Game::loop()
 	{
 		a = SDL_GetTicks();
 		Uint32 deltaTime = a - b;
-		if (deltaTime >= 1000/60.0)
+		if (deltaTime >= 1000/180.0)
 		{
 			b = a;
 			//printf("%f\n", 1000.0f / (deltaTime + .1f));
+			SDL_Event _event = SDL_Event();
+			inputManager->ListenEvent(_event);
+//#pragma region Input
+//			if (inputManager.isDown(SDLK_RIGHT) || inputManager.isDown("d"))
+//			{	
+//				//Asound->PlaySound();
+//				//go->getTransform()->setPositionX(go->getTransform()->getPositionX() + 1);
+//
+//				go->rigidbodyComponent->applyForce(VEC2_RIGHT * 1);
+//			}
+//			if (inputManager.isDown(SDLK_LEFT) || inputManager.isDown("a"))
+//			{
+//				//Asound->PlaySound();
+//				//go->getTransform()->setPositionX(go->getTransform()->getPositionX() - 1);
+//
+//				go->rigidbodyComponent->applyForce(VEC2_LEFT * 1);
+//
+//			}
+//			if (inputManager.isDown(SDLK_UP) || inputManager.isDown("w"))
+//			{
+//				//Asound->PlaySound();
+//
+//				/*auto pos = *go->getTransform()->getPosition();
+//				auto dir = *go->getTransform()->getForward();
+//				go->getTransform()->setPosition(pos + dir);*/
+//				
+//				go->rigidbodyComponent->applyForce(VEC2_UP * 2);
+//			}
+//			if (inputManager.isDown(SDLK_DOWN) || inputManager.isDown("s"))
+//			{
+//				//Asound->PlaySound();
+//
+//				//go->getTransform()->setPositionY(go->getTransform()->getPositionY() + 1);
+//			}
+//			if (inputManager.isDown(SDLK_KP_PLUS))
+//			{
+//				auto s1 = *go->getTransform()->getScale();
+//				auto t = s1 + vector2(1,1);
+//				auto xx = t.data[0][0];
+//				auto yy = t.data[0][1];
+//				go->getTransform()->setScale(&t);
+//			}
+//			// if (inputManager.isDown(SDLK_KP_MINUS))
+//			// {
+//			// 	auto rb = go->rigidbodyComponent;
+//			// 	rb->applyForce(VEC2_UP*3);
+//			// }
+//			if (inputManager.isDown(SDLK_q))
+//			{
+//				go->getTransform()->setRotation(go->getTransform()->getRotation() - 1);
+//			}
+//			if (inputManager.isDown(SDLK_e))
+//			{
+//				go->getTransform()->setRotation(go->getTransform()->getRotation() + 1);
+//			}
+//
+//			inputManager.ListenEvent(event);
+//#pragma endregion
 
-#pragma region Input
-			if (inputManager.isDown(SDLK_RIGHT) || inputManager.isDown("d"))
-			{	
-				//Asound->PlaySound();
-				go->getTransform()->setPositionX(go->getTransform()->getPositionX() + 1);
-			}
-			if (inputManager.isDown(SDLK_LEFT) || inputManager.isDown("a"))
+			for (int i = 0; i < getActiveScene()->getGameObjects().size(); i++)
 			{
-				//Asound->PlaySound();
-				go->getTransform()->setPositionX(go->getTransform()->getPositionX() - 1);
-			}
-			if (inputManager.isDown(SDLK_UP) || inputManager.isDown("w"))
-			{
-				//Asound->PlaySound();
-
-				/*auto pos = *go->getTransform()->getPosition();
-				auto dir = *go->getTransform()->getForward();
-				go->getTransform()->setPosition(pos + dir);*/
-
-				go->getTransform()->setPositionY(go->getTransform()->getPositionY() - 1);
-			}
-			if (inputManager.isDown(SDLK_DOWN) || inputManager.isDown("s"))
-			{
-				//Asound->PlaySound();
-
-				go->getTransform()->setPositionY(go->getTransform()->getPositionY() + 1);
-			}
-			if (inputManager.isDown(SDLK_KP_PLUS))
-			{
-				auto s1 = *go->getTransform()->getScale();
-				auto t = s1 + vector2(1,1);
-				auto xx = t.data[0][0];
-				auto yy = t.data[0][1];
-				go->getTransform()->setScale(&t);
-			}
-			// if (inputManager.isDown(SDLK_KP_MINUS))
-			// {
-			// 	auto rb = go->rigidbodyComponent;
-			// 	rb->applyForce(VEC2_UP*3);
-			// }
-			if (inputManager.isDown(SDLK_q))
-			{
-				go->getTransform()->setRotation(go->getTransform()->getRotation() - 1);
-			}
-			if (inputManager.isDown(SDLK_e))
-			{
-				go->getTransform()->setRotation(go->getTransform()->getRotation() + 1);
+				getActiveScene()->getGameObjects()[i]->update();
 			}
 
-			inputManager.ListenEvent(event);
-#pragma endregion
-
-			for (int i = 0; i < gameObjects.size(); i++)
-			{
-				gameObjects[i]->update();
-			}
+			physicsMotor->update();
 
 			window->render();
-
-			auto col1 = dynamic_cast<CircleCollider*>(any_cast<Collider*>(go->getComponent(typeid(Collider*))));
-			auto col2 = dynamic_cast<CircleCollider*>(any_cast<Collider*>(go2->getComponent(typeid(Collider*))));
-
-			if (Collision::isCollidingCircleAndCircle(*col1,*col2))
-			{
-				printf("çarpışış");
-			}
 		}
 
 	}

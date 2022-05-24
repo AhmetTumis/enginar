@@ -4,6 +4,7 @@
 #include <vector>
 #include "Texture.h"
 #include <string>
+#include "../common/Vector.h"
 
 using namespace std;
 
@@ -32,6 +33,8 @@ public:
 
 	SDL_Window* getWindow() { return window; }
 	SDL_Renderer* getRenderer() { return renderer; }
+
+	vector2 getWindowSize();
 
 private:
 	SDL_Window* window;

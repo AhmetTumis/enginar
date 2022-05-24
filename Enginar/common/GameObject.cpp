@@ -1,11 +1,21 @@
 #include "GameObject.h"
 #include "../graphics/Texture.h"
+#include "Game.h"
+#include "../entrypoint.h"
 
 //Transformation'� yarat�r
 //Bu da i�erisinde position, rotation ve scale tutar
 void GameObject::init()
 {
+	getTetris()->addGameObject(this);
+
 	addComponent(make_any<Transform*>(new Transform()));
+	movementDelta = new vector2(0, 0);
+}
+
+Transform* GameObject::getTransform()
+{
+	return transformComponent;
 }
 
 void GameObject::addComponent(any component)
@@ -13,6 +23,7 @@ void GameObject::addComponent(any component)
 	if (component.type() == typeid(Transform*))
 	{
 		transformComponent = any_cast<Transform*>(component);
+		transformComponent->setOwner(this);
 	}
 	if (component.type() == typeid(Texture*))
 	{
@@ -70,8 +81,28 @@ void GameObject::update()
 			transformComponent->setPosition(&(*(transformComponent->getPosition()) + rigidbodyComponent->getVelocity()));
 		}
 
-		//update texture rect according to transform rect
-		textureComponent->textureRect = transformComponent->rect1;
-		textureComponent->rotation = transformComponent->getRotation();
+		if (parent != nullptr)
+		{
+			updateTexture(parent->willUpdateTexture);
+		}
+		else
+		{
+			updateTexture(willUpdateTexture);
+		}
 	}
+}
+
+void GameObject::updateTexture(bool willUpdate)
+{
+	if (textureComponent != nullptr && transformComponent != nullptr)
+	{
+		if (willUpdate)
+		{
+			//update texture rect according to transform rect
+			textureComponent->textureRect = transformComponent->rect1;
+			textureComponent->rotation = transformComponent->getRotation();
+		}
+		textureComponent->physicsRect = transformComponent->rect1;
+	}
+
 }

@@ -13,21 +13,58 @@ Transform::Transform()
 
 void Transform::setPosition(vector2* newPosition)
 {
+	auto delta = (*position - *newPosition);
+	for (int i = 0; i < ownerGameObject->children.size(); i++)
+	{
+		if (delta.m < 0)
+		{
+			continue;
+		}
+		ownerGameObject->children[i]->getTransform()->setPosition(&(*(ownerGameObject->children[i]->getTransform()->getPosition()) + delta));
+	}
+
 	position = newPosition;
 	rect1.x = (int)position->x;
 	rect1.y = (int)position->y;
+
+	posX = position->x;
+	posY = position->y;
 }
 
 void Transform::setPositionX(float x)
 {
+	auto oldPosition = new vector2();
+	oldPosition->copyFrom(*position);
+
 	position->x = x;
 	rect1.x = (int)position->x;
+
+	auto delta = (*position - *oldPosition);
+
+	for (int i = 0; i < ownerGameObject->children.size(); i++)
+	{
+		ownerGameObject->children[i]->getTransform()->setPosition(&(*(ownerGameObject->children[i]->getTransform()->getPosition()) + delta));
+	}
+
+	posX = x;
 }
 
 void Transform::setPositionY(float y)
 {
+	auto oldPosition = new vector2();
+	oldPosition->copyFrom(*position);
+
 	position->y = y;
 	rect1.y = (int)position->y;
+
+	auto delta = (*position - *oldPosition);
+
+	for (int i = 0; i < ownerGameObject->children.size(); i++)
+	{
+		ownerGameObject->children[i]->getTransform()->setPosition(&(*(ownerGameObject->children[i]->getTransform()->getPosition()) + delta));
+	}
+
+	posY = y;
 }
 
 void Transform::setScale(float _scale)

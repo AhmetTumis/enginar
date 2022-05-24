@@ -10,7 +10,8 @@ public:
 	Texture(const char* _path);
 	void init();
 
-	SDL_Rect textureRect;
+	SDL_Rect textureRect; //Rendering
+	SDL_Rect physicsRect; //Physics shape
 	double rotation;
 
 	SDL_Texture* getSDLTextures() { return sdlTexture; };

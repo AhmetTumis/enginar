@@ -1,15 +1,20 @@
 #pragma once
 #include "EnginarMath.h"
+#include "GameObject.h"
 #include "vector.h"
 #include <SDL_video.h>
 #include <math.h>
 
 #define PI 3.14159265
 
+class GameObject;
+
 class Transform
 {
 public:
 	Transform();
+
+	float posX, posY;
 
 	//position setters
 	void setPosition(vector2* newPosition);
@@ -45,11 +50,18 @@ public:
 	inline int getRotation() { return rotation; };
 
 	SDL_Rect rect1;
+
+	GameObject* getOwner() { return ownerGameObject; }
+	void setOwner(GameObject* owner) { ownerGameObject = owner; }
+
 private:
 	vector2* position;
 	vector2* forward;
 	vector2* up;
 	vector2* scale;
 	int rotation = 0;
+
+	GameObject* ownerGameObject = nullptr;
+
 };
 
