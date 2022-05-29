@@ -1,16 +1,12 @@
-#include "Tetris.h"
-#include "Piece.h"
+#include "SpaceInvaders.h"
+#include "MenuManager.h"
 #include "GameManager.h"
-#include "../../common/Scene.h"
-#include "../../games/tetris/MenuManager.h"
 
-Tetris::Tetris()
+SpaceInvaders::SpaceInvaders()
 {
-
-
 }
 
-void Tetris::initializeGame(Window* _window)
+void SpaceInvaders::initializeGame(Window* _window)
 {
 	Game::initializeGame(_window);
 
@@ -25,8 +21,6 @@ void Tetris::initializeGame(Window* _window)
 	mm->createUI(gameScene);
 
 	//gm->init(mainMenu);
-
-	printf("Welcome to tetris");
 
 	loop();
 }

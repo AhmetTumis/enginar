@@ -9,15 +9,28 @@
 #include "../graphics/Sprite.h"
 #include "../physics/Collider.h"
 #include "../physics/RigidBody.h"
+#include "Scene.h"
+#include "../graphics/Text.h"
 
 using namespace std;
 class Transform;
+class Scene;
 
 class GameObject
 {
 public:
-	void init();
+	~GameObject();
+
+	void Destroy();
+
+	const char* name = "";
+
+	bool isActive;
+
+	void init(Scene* scene);
 	Transform* getTransform();
+	Texture* getTexture();
+	Text* getText();
 	void addComponent(any component);
 	any getComponent(const type_info& componentType);
 	virtual void update();
@@ -56,10 +69,12 @@ private:
 	Sprite* spriteComponent = nullptr;
 	Transform* transformComponent = nullptr;
 	Collider* colliderComponent = nullptr;
+	Text* textComponent = nullptr;
 
 	vector<GameObject*> collidedGameObjects;
 
 protected:
 	bool willUpdateTexture = true;
+	Scene* myScene = nullptr;
 };
 

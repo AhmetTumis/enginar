@@ -22,8 +22,9 @@ void GameManager::spawnPiece()
 		}
 	}
 
-	testPiece = new Piece(*shape);
-	testPiece->init();
+	testPiece = new Piece();
+	testPiece->init(myScene);
+	testPiece->createShape(*shape);
 }
 
 int GameManager::getRand()

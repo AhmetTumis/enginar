@@ -8,7 +8,10 @@ class Texture
 {
 public:
 	Texture(const char* _path);
-	void init();
+	virtual void init();
+
+	int defaultTextureWidth = 1;
+	int defaultTextureHeight = 1;
 
 	SDL_Rect textureRect; //Rendering
 	SDL_Rect physicsRect; //Physics shape
@@ -19,7 +22,7 @@ public:
 
 	bool render = true;
 
-private:
+protected:
 	const char* path;
 	bool initialized = false;
 

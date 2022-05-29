@@ -2,8 +2,12 @@
 
 InputManager::InputManager()
 {
+	instance = this;
+
 	updateState();
 	updateIsPressedState();
+
+	mousePosition = new vector2(0, 0);
 }
 
 void InputManager::updateState()
@@ -14,6 +18,10 @@ void InputManager::updateState()
 void InputManager::updateIsPressedState()
 {
 	keyPressedStates = const_cast<Uint8*>(SDL_GetKeyboardState(nullptr));
+}
+
+void InputManager::updateMouseState()
+{
 }
 
 void InputManager::ListenEvent(SDL_Event event)
@@ -31,6 +39,17 @@ void InputManager::ListenEvent(SDL_Event event)
 				}
 				break;
 		}
+
+		int mx;
+		int my;
+
+		SDL_PumpEvents();
+
+		SDL_GetMouseState(&mx, &my);
+
+
+		mousePosition->x = mx;
+		mousePosition->y = my;
 	}
 }
 
@@ -54,6 +73,23 @@ bool InputManager::isDown(SDL_Keycode key)
 {
 	SDL_Scancode scanCode = SDL_GetScancodeFromKey(key);
 	return isDown(scanCode);
+}
+
+bool InputManager::isPressing(SDL_Scancode key)
+{
+	return keyPressedStates[key];
+}
+
+bool InputManager::isPressing(string key)
+{
+	SDL_Scancode scanCode = keyMap[key];
+	return isPressing(scanCode);
+}
+
+bool InputManager::isPressing(SDL_Keycode key)
+{
+	SDL_Scancode scanCode = SDL_GetScancodeFromKey(key);
+	return isPressing(scanCode);
 }
 
 unordered_map<string, SDL_Scancode> InputManager::keyMap = {

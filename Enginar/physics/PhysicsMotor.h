@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Raycast.h"
+
 class PhysicsMotor
 {
 public:
@@ -11,5 +14,7 @@ public:
 	PhysicsMotor();
 
 	void update();
+private:
+	Raycast* raycast = nullptr;
 };
 

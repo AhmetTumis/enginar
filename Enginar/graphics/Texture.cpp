@@ -13,5 +13,8 @@ void Texture::init()
 	SDL_FreeSurface(textureSurface);
 	TextureManager::getInstance()->addTextureToWindow(this);
 
+	defaultTextureWidth = textureSurface->w;
+	defaultTextureHeight = textureSurface->h;
+
 	initialized = true;
 }

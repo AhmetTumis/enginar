@@ -1,5 +1,8 @@
 #pragma once
-#include "common/GameObject.h"
+#include "GameObject.h"
+
+class GameObject;
+
 class Scene
 {
 public:
@@ -11,6 +14,8 @@ public:
 	void addGameObject(GameObject* gameObject);
 
 	vector<GameObject*> getGameObjects() { return gameObjects; }
+
+	void removeGameObject(GameObject* objToRemove);
 
 private:
 	vector<GameObject*> gameObjects;

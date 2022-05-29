@@ -1,6 +1,6 @@
 #include "entrypoint.h"
 
-static Tetris* game = nullptr;
+static SpaceInvaders* game = nullptr;
 
 int main(int argc, char* argv[])
 {
@@ -12,13 +12,8 @@ int main(int argc, char* argv[])
 
 	window->initializeWindow("Enginar", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 
-	game = new Tetris();
+	game = new SpaceInvaders();
 	game->initializeGame(window);
 
 	return 0;
-}
-
-Tetris* getTetris()
-{
-	return game;
 }

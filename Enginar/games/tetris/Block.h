@@ -8,9 +8,9 @@ class Block : public GameObject
 {
 public:
 
-	Block(float posX, float posY)
+	Block(float posX, float posY, Scene* scene)
 	{
-		init();
+		init(scene);
 
 		Texture* blockTexture = new Texture("assets/square.png");
 		addComponent(make_any<Texture*>(dynamic_cast<Texture*>(blockTexture)));

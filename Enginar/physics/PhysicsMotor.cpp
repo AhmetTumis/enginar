@@ -5,28 +5,31 @@
 PhysicsMotor::PhysicsMotor()
 {
 	instance = this;
+	raycast = new Raycast();
 }
 
 //Calculate all the possible collisions
 void PhysicsMotor::update()
 {
-	for (auto gameObject1 : getTetris()->getGameObjects())
+	auto scene = Game::getInstance()->getActiveScene();
+
+	for (auto gameObject1 : scene->getGameObjects())
 	{
 		auto colA = (any_cast<Collider*>(gameObject1->getComponent(typeid(Collider*))));
 
-		if (colA == nullptr)
+		if (gameObject1->isActive == false || colA == nullptr)
 		{
 			continue;
 		}
 
 		auto colTypeA = colA->GetType();
 
-		for (auto gameObject2 : getTetris()->getGameObjects())
+		for (auto gameObject2 : scene->getGameObjects())
 		{
-			if (gameObject1 != gameObject2 && gameObject1->parent != gameObject2->parent)
+			if (gameObject1 != gameObject2 && ((gameObject1->parent != nullptr && gameObject1->parent != gameObject2->parent) || (gameObject1->parent == nullptr)))
 			{
 				auto colB = (any_cast<Collider*>(gameObject2->getComponent(typeid(Collider*))));
-				if (colB == nullptr)
+				if (gameObject2->isActive == false || colB == nullptr)
 				{
 					continue;
 				}

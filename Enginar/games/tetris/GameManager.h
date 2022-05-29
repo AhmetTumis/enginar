@@ -14,8 +14,10 @@ public:
 		return go;
 	}
 
-	GameManager()
+	GameManager(Scene* scene)
 	{
+		init(scene);
+
 		go = this;
 
 		//float spacingX = Game::getInstance()->getWindow()->getWindowSize().x / 10.0f;
@@ -41,8 +43,9 @@ public:
 			}
 		}
 
-		testPiece = new Piece(*shape);
-		testPiece->init();
+		testPiece = new Piece();
+		testPiece->init(myScene);
+		testPiece->createShape(*shape);
 	}
 
 	int getRand();

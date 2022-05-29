@@ -3,6 +3,7 @@
 #include "../common/Game.h"
 #include "TextureManager.h"
 #include "../sound/Sound.h"
+#include "SDL_ttf.h"
 
 Window::Window()
 {
@@ -21,6 +22,11 @@ void Window::initializeWindow(const char* title, int x, int y, bool isFullScreen
 	window = SDL_CreateWindow("Enginar", x, y, 500, 900, SDL_WINDOW_SHOWN);
 	
 	renderer = SDL_CreateRenderer(window, -1, 0);
+
+	if (TTF_Init() < 0)
+	{
+		printf("mal amk");
+	}
 
 	//caption
 	//SDL_WM_SetCaption(title, "radish.bmp");
@@ -54,6 +60,9 @@ void Window::render()
 
 		SDL_RenderCopyEx(renderer, tex->sdlTexture, NULL, &tex->textureRect, tex->rotation, NULL, SDL_FLIP_NONE);
 	}
+
+	//SDL_FreeSurface(surfaceMessage);
+	//SDL_DestroyTexture(Message);
 
 	//Renderer'� ekranda g�ster
 	SDL_RenderPresent(renderer);

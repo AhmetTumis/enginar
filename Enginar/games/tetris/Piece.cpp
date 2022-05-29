@@ -4,7 +4,12 @@
 #include "GameManager.h"
 #include "../../physics/Collision.h"
 
-Piece::Piece(Matrix3x3& _shape)
+Piece::Piece()
+{
+
+}
+
+void Piece::createShape(Matrix3x3& _shape)
 {
 	shape = &_shape;
 	int minY = 2, maxY = 0, minX = 2, maxX = 0;
@@ -14,7 +19,7 @@ Piece::Piece(Matrix3x3& _shape)
 		{
 			if (_shape.data[i][j] == 1)
 			{
-				auto* block = new Block(i, j);
+				auto* block = new Block(i, j, myScene);
 				blocks.push_back(block);
 				block->parent = this;
 				children.push_back(block);
@@ -83,7 +88,7 @@ void Piece::update()
 
 		getTransform()->setPositionY(getTransform()->getPositionY() + 1);
 
-		float winY = getTetris()->getWindow()->getWindowSize().y;
+		float winY = Game::getInstance()->getWindow()->getWindowSize().y;
 		if (downMostBlock->getTransform()->getPositionY() + 50 >= winY)
 		{
 			Place();
@@ -103,7 +108,7 @@ void Piece::moveLeft()
 
 void Piece::moveRight()
 {
-	float winX = getTetris()->getWindow()->getWindowSize().x;
+	float winX = Game::getInstance()->getWindow()->getWindowSize().x;
 
 	if (rightMostBlock->getTransform()->getPositionX() > winX - 60)
 	{

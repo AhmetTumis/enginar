@@ -11,7 +11,9 @@ using namespace std;
 class Piece : public GameObject
 {
 public:
-	Piece(Matrix3x3& _shape);
+	Piece();
+
+	void createShape(Matrix3x3& _shape);
 
 	void update();
 

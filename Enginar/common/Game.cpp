@@ -9,6 +9,7 @@
 
 Game::Game()
 {
+	instance = this;
 }
 
 Game::~Game()

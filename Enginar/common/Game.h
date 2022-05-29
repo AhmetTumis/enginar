@@ -5,7 +5,7 @@
 #include "../common/GameObject.h"
 #include "../io/InputManager.h"
 #include "../physics/PhysicsMotor.h"
-#include "../Scene.h"
+#include "../common/Scene.h"
 
 class Game
 {
@@ -30,7 +30,11 @@ public:
 
 	Scene* getActiveScene() { return activeScene; }
 
-	void addGameObject(GameObject* gameObject);
+	void addScene(Scene* scene) { scenes.push_back(scene); }
+
+	void setActiveScene(Scene* scene) { activeScene = scene; }
+
+	//void addGameObject(GameObject* gameObject);
 	InputManager* inputManager;
 
 	Window* getWindow() { return window; }
