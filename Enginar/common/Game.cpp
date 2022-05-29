@@ -6,6 +6,7 @@
 #include "../common/Vector.h"
 #include "../physics/RigidBody.h"
 #include "../sound/Sound.h"
+#include "../io/DataManager.h"
 
 Game::Game()
 {
@@ -102,7 +103,7 @@ void Game::loop()
 
 	int i = 0;
 	Uint32 a = 0, b = 0;
-	while (true)
+	while (isWorking)
 	{
 		a = SDL_GetTicks();
 		Uint32 deltaTime = a - b;
@@ -180,4 +181,6 @@ void Game::loop()
 		}
 
 	}
+
+	DataManager::getInstance()->SaveData();
 }

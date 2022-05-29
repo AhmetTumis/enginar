@@ -4,6 +4,7 @@
 #include "../../common/Game.h"
 #include "../../common/SceneManager.h"
 #include "../../graphics/Text.h"
+#include "../../io/DataManager.h"
 
 void MenuManager::update()
 {
@@ -19,6 +20,8 @@ void MenuManager::update()
 
 void MenuManager::createUI(Scene* gs)
 {
+	DataManager* dm = new DataManager();
+
 	gameScene = gs;
 
 	playButtonGO = new GameObject();
@@ -31,4 +34,12 @@ void MenuManager::createUI(Scene* gs)
 
 	BoxCollider* col = new BoxCollider("block", 0, 0, .99f, .99f, playButtonTexture);
 	playButtonGO->addComponent(make_any<Collider*>(dynamic_cast<Collider*>(col)));
+
+	auto scoreText = new GameObject();
+	scoreText->init(myScene);
+
+	Text* t = new Text("test");
+
+	t->init(("High Score: "+ std::to_string(DataManager::getInstance()->ReadInt("highscore"))).c_str(), "assets/Marker Felt.ttf", 24, SDL_Rect{0,0,200,50});
+	scoreText->addComponent(make_any<Text*>(dynamic_cast<Text*>(t)));
 }

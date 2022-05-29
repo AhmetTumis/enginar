@@ -1,5 +1,6 @@
 #include "Bullet.h"
 #include "GameManager.h"
+#include "../../io/DataManager.h"
 
 Bullet::Bullet(Scene* scene, bool isUp)
 {
@@ -28,13 +29,15 @@ void Bullet::OnCollide(GameObject* other)
 	auto col = (any_cast<Collider*>(other->getComponent(typeid(Collider*))));
 	if (col->tag == "enemy")
 	{
-		printf("bum");
-
 		Destroy();
 		other->Destroy();
 
 		GameManager::getGO()->score++;
+		if (DataManager::getInstance()->ReadInt("highscore") < GameManager::getGO()->score)
+		{
+			DataManager::getInstance()->SaveInt("highscore", GameManager::getGO()->score);
+		}
 
-		GameManager::getGO()->scoreText->getText()->setText(("Score: "+std::to_string(GameManager::getGO()->score)).c_str());
+		GameManager::getGO()->scoreText->getText()->setText(("Score: " + std::to_string(GameManager::getGO()->score)).c_str());
 	}
 }

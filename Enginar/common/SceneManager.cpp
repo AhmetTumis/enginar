@@ -10,4 +10,8 @@ void SceneManager::loadScene(Scene* scene)
 {
 	Game::getInstance()->getActiveScene()->unload();
 	Game::getInstance()->setActiveScene(scene);
+	for (int i = 0; i < scene->getGameObjects().size(); i++)
+	{
+		scene->getGameObjects()[i]->onSceneLoaded();
+	}
 }

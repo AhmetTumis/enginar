@@ -31,6 +31,11 @@ void GameObject::Destroy()
 		textureComponent->render = false;
 	}
 
+	if (textComponent != nullptr)
+	{
+		textComponent->render = false;
+	}
+
 	//myScene->removeGameObject(this);
 
 	//delete this;
@@ -47,6 +52,10 @@ void GameObject::init(Scene* scene)
 
 	addComponent(make_any<Transform*>(new Transform()));
 	movementDelta = new vector2(0, 0);
+}
+
+void GameObject::onSceneLoaded()
+{
 }
 
 Transform* GameObject::getTransform()

@@ -28,6 +28,9 @@ public:
 	bool isActive;
 
 	void init(Scene* scene);
+
+	virtual void onSceneLoaded();
+
 	Transform* getTransform();
 	Texture* getTexture();
 	Text* getText();
@@ -64,6 +67,8 @@ public:
 			isColliding = collidedGameObjects.size() > 0;
 		}
 	}
+	Scene* myScene = nullptr;
+
 private:
 	Texture* textureComponent = nullptr;
 	Sprite* spriteComponent = nullptr;
@@ -75,6 +80,5 @@ private:
 
 protected:
 	bool willUpdateTexture = true;
-	Scene* myScene = nullptr;
 };
 

@@ -2,6 +2,7 @@
 #include "../../io/InputManager.h"
 #include "Bullet.h"
 #include "../../common/Game.h"
+#include "GameManager.h"
 
 void PlayerShip::update()
 {
@@ -41,20 +42,36 @@ void PlayerShip::update()
 
 void EnemyShip::update()
 {
+	if (!isActive)
+	{
+		return;
+	}
+
 	GameObject::update();
 
 	cooldown--;
 
 	if (cooldown <= 0)
 	{
-		cooldown = 2;
+		cooldown = 1;
 
 		getTransform()->setPositionX(getTransform()->getPositionX() + 1);
 
 		if (getTransform()->getPositionX() > Game::getInstance()->getWindow()->getWindowSize().x)
 		{
-			getTransform()->setPositionY(getTransform()->getPositionY() + 50);
+			getTransform()->setPositionY(getTransform()->getPositionY() + 500);
 			getTransform()->setPositionX(0);
+		}
+
+		if (getTransform()->getPositionY() > Game::getInstance()->getWindow()->getWindowSize().y)
+		{
+			GameManager::getGO()->health--;
+			if (GameManager::getGO()->health <= 0)
+			{
+				Game::getInstance()->isWorking = false;
+			}
+			GameManager::getGO()->healthText->getText()->setText(("Health: " + std::to_string(GameManager::getGO()->health)).c_str());
+			Destroy();
 		}
 	}
 }

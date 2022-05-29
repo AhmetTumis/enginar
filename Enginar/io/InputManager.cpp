@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include "../common/Game.h"
 
 InputManager::InputManager()
 {
@@ -36,6 +37,17 @@ void InputManager::ListenEvent(SDL_Event event)
 				if (event.key.repeat == false)
 				{
 					updateIsPressedState();
+				}
+				break;
+			case SDL_WINDOWEVENT:
+				switch (event.window.event) {
+
+				case SDL_WINDOWEVENT_CLOSE:   // exit game
+					Game::getInstance()->isWorking = false;
+					break;
+
+				default:
+					break;
 				}
 				break;
 		}

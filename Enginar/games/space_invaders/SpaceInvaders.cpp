@@ -14,13 +14,12 @@ void SpaceInvaders::initializeGame(Window* _window)
 	Game::getInstance()->setActiveScene(mainMenu);
 
 	Scene* gameScene = new Scene();
-	GameManager* gm = new GameManager(gameScene);
+	GameManager* gm = new GameManager();
+	gm->init(gameScene);
 
 	MenuManager* mm = new MenuManager();
 	mm->init(mainMenu);
 	mm->createUI(gameScene);
-
-	//gm->init(mainMenu);
 
 	loop();
 }

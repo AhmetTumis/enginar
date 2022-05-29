@@ -39,6 +39,8 @@ public:
 
 	Window* getWindow() { return window; }
 
+	bool isWorking = true;
+
 private:
 	Window* window;
 	//vector<GameObject*> gameObjects;
